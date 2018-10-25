@@ -5,7 +5,7 @@ import java.util.Date;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class Block {
-    private String mData; //our data will be a simple message.
+    private Object mData; //our data will be a simple message.
     private long mTimeStamp; //as number of milliseconds since 1/1/1970.
     private String mHash;
     private String mPreviousHash;
@@ -13,7 +13,7 @@ public class Block {
     
     // Construtor do bloco, utilizando como parâmetro do dado de entrada,
     // a hash do último bloco da blockchain e o índice do novo bloco.
-    public Block(String data, String previousHash, long i) {
+    public Block(Object data, String previousHash, long i) {
     	this.mData = data;
     	this.mPreviousHash = previousHash;
     	this.mTimeStamp = new Date().getTime();
@@ -22,7 +22,7 @@ public class Block {
     }
     
     // Retorna o dado armazenado no bloco
-	public String GetData() {
+	public Object GetData() {
         return this.mData;
     }
     
@@ -54,7 +54,7 @@ public class Block {
     
     // Calcula a hash do bloco atual
     public String CalculateHash() {
-    	String sha256hex = DigestUtils.sha256Hex(mTimeStamp+mData+mPreviousHash+mIndex);
+    	String sha256hex = DigestUtils.sha256Hex(mTimeStamp+(String)mData+mPreviousHash+mIndex);
     	return sha256hex;
     }
 }
