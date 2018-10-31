@@ -5,7 +5,7 @@ import java.util.Date;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class Block {
-    private Object mData; //our data will be a simple message.
+    private Object mData; //our data will be a simple message.milliseconds
     private long mTimeStamp; //as number of milliseconds since 1/1/1970.
     private String mHash;
     private String mPreviousHash;
@@ -54,7 +54,7 @@ public class Block {
     
     // Calcula a hash do bloco atual
     public String CalculateHash() {
-    	String sha256hex = DigestUtils.sha256Hex(mTimeStamp+(String)mData+mPreviousHash+mIndex);
+    	String sha256hex = DigestUtils.sha256Hex(""+mTimeStamp+mData+mPreviousHash+mIndex);
     	return sha256hex;
     }
 }
