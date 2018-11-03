@@ -33,7 +33,6 @@ public class Main {
         }
         Object teste = new Date("01/01/2018");
         System.out.println(teste.getClass());
-        Date data = (Date)teste;
-        System.out.println(data);
+        
     }
 }

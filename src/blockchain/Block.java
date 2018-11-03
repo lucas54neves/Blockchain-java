@@ -5,7 +5,7 @@ import java.util.Date;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class Block {
-    private Object mData; //our data will be a simple message.milliseconds
+    private Object mData; //our data will be a simple message.
     private long mTimeStamp; //as number of milliseconds since 1/1/1970.
     private String mHash;
     private String mPreviousHash;
