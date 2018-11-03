@@ -2,8 +2,6 @@ package blockchain;
 
 import java.util.Date;
 
-// Get retorna
-// Set modifica
 public class Sacar {
     // Atributos da classe Sacar
     private int mAgencia;
@@ -72,10 +70,11 @@ public class Sacar {
         return SaldoPositivo() && GetValor() > GetSaldo();
     }
     
-    public void OperacaoSaque() {
+    // Operação de saque
+    public void OperacaoSaque(double valor) {
         if (SaqueValido()) {
-            double saldo = GetSaldo() - GetValor();
-            SetSaldo(saldo);
+            SetValor(valor);
+            SetSaldo(GetSaldo() - GetValor());
         }
     }
 }
