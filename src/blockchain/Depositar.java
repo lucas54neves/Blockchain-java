@@ -3,7 +3,7 @@ package blockchain;
 import java.util.Date;
 
 public class Depositar {
-    // Atributos da classe Sacar
+    // Atributos da classe Depositar
     private int mAgencia;
     private int mConta;
     private long mData;
