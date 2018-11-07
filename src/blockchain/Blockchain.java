@@ -31,13 +31,14 @@ public class Blockchain {
     // Imprime a blockchain a fim de depuração
     public void Print() {
         for (int i = 0; i < mChain.size(); ++i) {
-            System.out.printf(
+            /*System.out.printf(
                 "Block " + mChain.get(i).GetIndex() +
                 "\nData: " + mChain.get(i).GetData() +
                 "\nPrevious Hash: " + mChain.get(i).GetPreviousHash() +
                 "\nHash: " + mChain.get(i).GetHash() +
                 "\nTime: " + mChain.get(i).GetTime() +
-                "\n");
+                "\n");*/
+            mChain.get(i).Imprimir();
         }
     }
 

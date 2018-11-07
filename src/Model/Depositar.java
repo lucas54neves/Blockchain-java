@@ -1,4 +1,4 @@
-package blockchain;
+package Model;
 
 import java.util.Date;
 
@@ -9,6 +9,14 @@ public class Depositar {
     private long mData;
     private double mSaldo;
     private double mValor;
+
+    public Depositar(int mAgencia, int mConta, long mData, double mSaldo, double mValor) {
+        this.mAgencia = mAgencia;
+        this.mConta = mConta;
+        this.mData = mData;
+        this.mSaldo = mSaldo;
+        this.mValor = mValor;
+    }    
     
     // Retorna a agência da conta do saque
     public int GetAgencia() {
@@ -59,10 +67,10 @@ public class Depositar {
     public void SetValor(double valor) {
         this.mValor = valor;
     }
-    
-    // Operação de deposito
-    public void OperacaoDeposito(double valor) {
-        SetValor(valor);
-        SetSaldo(GetSaldo() + GetValor());
+        
+    @Override
+    public String toString() {
+        return "Transação: Depositar"+"\nAgencia: "+mAgencia+"\nConta: "+mConta+
+                "\nData: "+new Date(mData)+"\nSaldo: "+mSaldo+"\nValor: "+mValor;
     }
 }

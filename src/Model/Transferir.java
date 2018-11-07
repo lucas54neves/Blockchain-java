@@ -1,4 +1,4 @@
-package blockchain;
+package Model;
 
 import java.util.Date;
 
@@ -12,6 +12,17 @@ public class Transferir {
     private double mSaldoContaDestino;
     private double mSaldoContaOrigem;
     private double mValor;
+
+    public Transferir(int mAgenciaOrigem, int mAgenciaDestino, int mContaOrigem, int mContaDestino, long mData, double mSaldoContaDestino, double mSaldoContaOrigem, double mValor) {
+        this.mAgenciaOrigem = mAgenciaOrigem;
+        this.mAgenciaDestino = mAgenciaDestino;
+        this.mContaOrigem = mContaOrigem;
+        this.mContaDestino = mContaDestino;
+        this.mData = mData;
+        this.mSaldoContaDestino = mSaldoContaDestino;
+        this.mSaldoContaOrigem = mSaldoContaOrigem;
+        this.mValor = mValor;
+    }
     
     // Retorna a agência de destino da transferência
     public int GetAgenciaDestino() {

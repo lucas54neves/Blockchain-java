@@ -57,4 +57,9 @@ public class Block {
     	String sha256hex = DigestUtils.sha256Hex(""+mTimeStamp+mData+mPreviousHash+mIndex);
     	return sha256hex;
     }
+   
+    public void Imprimir() {
+        System.out.println("Dados do Bloco: "+(this.mData.getClass().cast(this.mData)).toString());
+              
+    }
 }

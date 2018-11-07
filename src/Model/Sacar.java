@@ -1,4 +1,4 @@
-package blockchain;
+package Model;
 
 import java.util.Date;
 
@@ -9,6 +9,16 @@ public class Sacar {
     private long mData;
     private double mSaldo;
     private double mValor;
+
+    public Sacar(int mAgencia, int mConta, long mData, double mSaldo, double mValor) {
+        this.mAgencia = mAgencia;
+        this.mConta = mConta;
+        this.mData = mData;
+        this.mSaldo = mSaldo;
+        this.mValor = mValor;
+    }
+    
+    
     
     // Retorna a agência da conta do saque
     public int GetAgencia() {
@@ -76,5 +86,11 @@ public class Sacar {
             SetValor(valor);
             SetSaldo(GetSaldo() - GetValor());
         }
+    }
+    
+    @Override
+    public String toString() {
+        return "Transação: Sacar"+"\nAgencia: "+mAgencia+"\nConta: "+mConta+
+                "\nData: "+new Date(mData)+"\nSaldo: "+mSaldo+"\nValor: "+mValor;
     }
 }
