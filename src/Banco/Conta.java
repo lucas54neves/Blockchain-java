@@ -5,10 +5,10 @@ public class Conta {
     private final int mConta;
     private double mSaldo;
 
-    public Conta(int mAgencia, int mConta, double mSaldo) {
+    public Conta(int mAgencia, int mConta) {
         this.mAgencia = mAgencia;
         this.mConta = mConta;
-        this.mSaldo = mSaldo;
+        this.mSaldo = 0.0;
     }
     
     public void Depositar(double valor) {
