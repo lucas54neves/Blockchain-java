@@ -1,15 +1,70 @@
 package Banco;
 
-import Model.*;
 import blockchain.*;
-import blockchain.Block;
-import blockchain.Blockchain;
 import java.util.*;
 
-public class Main {
+public class TesteBanco {
+    public static void MenuOperacoes() {
+        System.out.println("Entre com a operação desejada:");
+        System.out.println("[1] Depósito");
+        System.out.println("[2] Saque");
+        System.out.println("[3] Transferência");
+        System.out.println("[0] Sair");
+    }
+    
     public static void main(String[] args) {
-        System.out.println("Teste Banco");
+        System.out.println("Sistema Bancário");
+        Blockchain sistema = new Blockchain();
+        
+        MenuOperacoes();
+        
         Scanner ler = new Scanner(System.in);
+        int opcao = ler.nextInt();
+        Depositar dep;
+        Block bloco;
+        while (opcao != 0) {
+            switch(opcao) {
+                case 1:
+                    int conta;
+                    int agencia;
+                    double saldoAnterior;
+                    double deposito;
+                    double saldoAtual;
+                    
+                    System.out.println("Entre com a agência");
+                    agencia = ler.nextInt();
+                    System.out.println("Entre com a conta");
+                    conta = ler.nextInt();
+                    System.out.println("Entre com o saldo anterior");
+                    saldoAnterior = ler.nextDouble();
+                    System.out.println("Entre com o valor a depositar");
+                    deposito = ler.nextDouble();
+                    
+                    dep = new Depositar(conta, agencia, saldoAnterior, deposito);
+                    bloco = new Block(dep, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                    sistema.AddBlock(bloco);
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                default:
+                    System.out.println("Opção não cadastrada");
+                    break;
+            }
+            
+            MenuOperacoes();
+            opcao = ler.nextInt();
+        }
+        
+        sistema.Print();
+        
+        
+        
+        
+        /*Scanner ler = new Scanner(System.in);
         Blockchain chain = new Blockchain();
         Object dado = new String();
         
@@ -60,6 +115,6 @@ public class Main {
         bloco = new Block(tra, chain.GetLastBlock().GetHash(), chain.size()+1);
         chain.AddBlock(bloco);
         
-        chain.Print();
+        chain.Print();*/
     }
 }
