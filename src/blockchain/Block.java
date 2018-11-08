@@ -4,12 +4,12 @@ import java.util.Date;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Block {
-    private Object mData; //our data will be a simple message.
-    private long mTimeStamp; //as number of milliseconds since 1/1/1970.
-    private String mHash;
+public final class Block {
+    private final Object mData; //our data will be a simple message.
+    private final long mTimeStamp; //as number of milliseconds since 1/1/1970.
+    private final String mHash;
     private String mPreviousHash;
-    private long mIndex;
+    private final long mIndex;
     
     // Construtor do bloco, utilizando como parâmetro do dado de entrada,
     // a hash do último bloco da blockchain e o índice do novo bloco.
@@ -59,7 +59,12 @@ public class Block {
     }
    
     public void Imprimir() {
-        System.out.println("Dados do Bloco: "+(this.mData.getClass().cast(this.mData)).toString());
+        System.out.println();
+        System.out.println("Bloco " + mIndex);
+        System.out.println("Hash anterior: " + mPreviousHash);
+        System.out.println("Data de criação do bloco: " + new Date(mTimeStamp));
+        System.out.println("Hash atual: " + mHash);
+        System.out.println("## Dados do Bloco: ##\n"+(this.mData.getClass().cast(this.mData)).toString());
               
     }
 }
