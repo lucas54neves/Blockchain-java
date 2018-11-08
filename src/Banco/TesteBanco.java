@@ -38,19 +38,22 @@ public class TesteBanco {
                     System.out.println("Entre com o valor do primeiro depósito");
                     primeiroDeposito = ler.nextDouble();
                     
-                    Conta novaConta = new Conta(agenciaNova, contaNova, primeiroDeposito);
+                    Conta novaConta = new Conta(agenciaNova, contaNova);
                     
+                    Depositar depositoInicial = new Depositar(novaConta, primeiroDeposito);
+                    bloco = new Block (depositoInicial, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                    sistema.AddBlock(bloco);
                     break;
                 case 2:
-                    int conta;
-                    int agencia;
+                    int contaDeposito;
+                    int agenciaDeposito;
                     double saldoAnterior;
                     double valorDeposito;
                     
                     System.out.println("Entre com a agência");
-                    agencia = ler.nextInt();
+                    agenciaDeposito = ler.nextInt();
                     System.out.println("Entre com a conta");
-                    conta = ler.nextInt();
+                    contaDeposito = ler.nextInt();
                     // Buscar a conta
                     
                     System.out.println("Entre com o valor a depositar");
