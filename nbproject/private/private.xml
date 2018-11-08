@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Model/Transferir.java</file>
+            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Banco/Conta.java</file>
+            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Banco/Depositar.java</file>
             <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/blockchain/Blockchain.java</file>
-            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Model/Depositar.java</file>
-            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/blockchain/Teste.java</file>
+            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Banco/TesteBanco.java</file>
             <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/blockchain/Block.java</file>
-            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Model/Sacar.java</file>
-            <file>file:/C:/Users/lucas/Projects/Blockchain-java/src/Banco/Main.java</file>
         </group>
     </open-files>
 </project-private>

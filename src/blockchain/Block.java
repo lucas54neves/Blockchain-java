@@ -60,6 +60,7 @@ public final class Block {
    
     public void Imprimir() {
         System.out.println();
+        System.out.println("########################");
         System.out.println("Bloco " + mIndex);
         System.out.println("Hash anterior: " + mPreviousHash);
         System.out.println("Data de criação do bloco: " + new Date(mTimeStamp));

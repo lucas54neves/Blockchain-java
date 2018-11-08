@@ -3,24 +3,27 @@ package Banco;
 import java.util.Date;
 
 public class Depositar {
-    final int mConta;
-    final int mAgencia;
-    final long mData;
-    final double mSaldoAnterior;
-    final double mSaldoAtual;
-    final double mDeposito;
+    private final Conta mDestino;
+    private final Conta mOrigem;
+    private final long mData;
+    private final double mSaldoAnterior;
 
-    public Depositar(int mConta, int mAgencia, double mSaldoAnterior,double mDeposito) {
-        this.mConta = mConta;
-        this.mAgencia = mAgencia;
+    public Depositar(Conta conta, double valor) {
+        this.mDestino = conta;
+        this.mOrigem = null;
         this.mData = new Date().getTime();
-        this.mSaldoAnterior = mSaldoAnterior;
-        this.mDeposito = mDeposito;
-        this.mSaldoAtual = this.mSaldoAnterior + this.mDeposito;
+        this.mSaldoAnterior = conta.GetSaldo();
+        this.mDestino.Depositar(valor);
     }
     
     @Override
     public String toString() {
-        return "Depósito:"+"\nConta: "+mConta+"\nAgencia: "+mAgencia+"\nData: "+new Date(mData)+"\nSaldo anterior: "+mSaldoAnterior+"\nDepósito: "+mDeposito+"\nSaldo atual: "+mSaldoAtual;
+        return "Depósito:"+
+                "\nConta: "+mDestino.GetConta()+
+                "\nAgencia: "+mDestino.GetAgencia()+
+                "\nData: "+new Date(mData)+
+                "\nSaldo anterior: "+mSaldoAnterior+
+                "\nDepósito: "+mSaldoAnterior+
+                "\nSaldo atual: "+mDestino.GetSaldo();
     }
 }
