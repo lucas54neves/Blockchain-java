@@ -14,6 +14,10 @@ public class Depositar {
         this.mConta.Depositar(valor);
     }
     
+    public Conta GetConta() {
+        return mConta;
+    }
+    
     @Override
     public String toString() {
         return "# Depósito #"+
@@ -21,7 +25,7 @@ public class Depositar {
                 "\nConta: "+mConta.GetConta()+
                 "\nData: "+new Date(mData)+
                 "\nSaldo anterior: "+mSaldoAnterior+
-                "\nDepósito: "+mSaldoAnterior+
+                "\nDepósito: "+(mConta.GetSaldo()-mSaldoAnterior)+
                 "\nSaldo atual: "+mConta.GetSaldo();
     }
 }
