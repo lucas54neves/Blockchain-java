@@ -13,6 +13,17 @@ public class TesteBanco {
         System.out.println("[0] Sair");
     }
     
+    /*
+    public Conta BuscarConta(Blockchain sistema, int agencia, int conta) {
+        for (int i = sistema.size(); i > 0; --i) {
+            if (sistema.GetBlock(i).GetData().GetConta().GetAgencia() == agencia
+                    && sistema.GetBlock(i).GetData().GetConta().GetConta() == conta) {
+                return sistema.GetBlock(i).GetData().GetConta();
+            }
+        }
+    }
+    */
+    
     public static void main(String[] args) {
         System.out.println("Sistema Bancário");
         Blockchain sistema = new Blockchain();
@@ -54,7 +65,8 @@ public class TesteBanco {
                     agenciaDeposito = ler.nextInt();
                     System.out.println("Entre com a conta");
                     contaDeposito = ler.nextInt();
-                    // Buscar a conta
+                    
+                    //BuscarConta();
                     
                     System.out.println("Entre com o valor a depositar");
                     valorDeposito = ler.nextDouble();

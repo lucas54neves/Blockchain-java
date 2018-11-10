@@ -50,4 +50,8 @@ public class Blockchain {
     public int size() {
     	return mChain.size();
     }
+    
+    public final Block GetBlock(int i) {
+        return mChain.get(i);
+    }
 }
