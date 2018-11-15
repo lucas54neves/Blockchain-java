@@ -10,19 +10,21 @@ public class TesteBanco {
         System.out.println("[2] Depósito");
         System.out.println("[3] Saque");
         System.out.println("[4] Transferência");
+        System.out.println("[5] Saldo");
         System.out.println("[0] Sair");
     }
     
-    /*
+   
     public Conta BuscarConta(Blockchain sistema, int agencia, int conta) {
-        for (int i = sistema.size(); i > 0; --i) {
-            if (sistema.GetBlock(i).GetData().GetConta().GetAgencia() == agencia
-                    && sistema.GetBlock(i).GetData().GetConta().GetConta() == conta) {
-                return sistema.GetBlock(i).GetData().GetConta();
-            }
+        for (int i = sistema.size()-1; i > 0; i--) {
+            Object dados = sistema.GetBlock(i).GetData();
+            Conta conta3 = ((Depositar) dados).GetConta();
+            if (conta3.GetAgencia() == agencia && conta3.GetConta() == conta) {
+                    return conta3;
+                }
         }
+        return null;
     }
-    */
     
     public static void main(String[] args) {
         System.out.println("Sistema Bancário");
@@ -33,6 +35,9 @@ public class TesteBanco {
         Scanner ler = new Scanner(System.in);
         int opcao = ler.nextInt();
         Block bloco;
+        Conta conta1, conta2;
+        TesteBanco tb = new TesteBanco();
+        
         while (opcao != 0) {
             switch(opcao) {
                 case 1:
@@ -49,16 +54,17 @@ public class TesteBanco {
                     System.out.println("Entre com o valor do primeiro depósito");
                     primeiroDeposito = ler.nextDouble();
                     
-                    Conta novaConta = new Conta(agenciaNova, contaNova);
+                    conta1 = new Conta(agenciaNova, contaNova);
                     
-                    Depositar depositoInicial = new Depositar(novaConta, primeiroDeposito);
+                    Depositar depositoInicial = new Depositar(conta1, primeiroDeposito);
                     bloco = new Block (depositoInicial, sistema.GetLastBlock().GetHash(), sistema.size()+1);
                     sistema.AddBlock(bloco);
                     break;
                 case 2:
+                    System.out.println("# Depósito #");
+                    
                     int contaDeposito;
                     int agenciaDeposito;
-                    double saldoAnterior;
                     double valorDeposito;
                     
                     System.out.println("Entre com a agência");
@@ -66,18 +72,66 @@ public class TesteBanco {
                     System.out.println("Entre com a conta");
                     contaDeposito = ler.nextInt();
                     
-                    //BuscarConta();
+                    conta1 = tb.BuscarConta(sistema, agenciaDeposito, contaDeposito);
                     
+                    if(conta1 == null)
+                    {
+                        System.out.println("Conta não encontrada");
+                        break;
+                    }
                     System.out.println("Entre com o valor a depositar");
                     valorDeposito = ler.nextDouble();
-                    
+
+                    Depositar dep = new Depositar(conta1, valorDeposito);
+                    bloco = new Block (dep, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                    sistema.AddBlock(bloco);
                     
                     break;
                 case 3:
+                    System.out.println("# Saque #");
                     
+                    int agenciaSaque;
+                    int contaSaque;
+                    double valorSaque;
+                    
+                    System.out.println("Entre com a agência");
+                    agenciaSaque = ler.nextInt();
+                    System.out.println("Entre com a conta");
+                    contaSaque = ler.nextInt();
+                   
+                    conta1 = tb.BuscarConta(sistema, agenciaSaque, contaSaque);
+                    
+                    System.out.println("Entre com o valor para sacar");
+                    valorSaque = ler.nextDouble();
+                    
+                    Sacar saq = new Sacar(conta1, valorSaque);
+                    bloco = new Block (saq, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                    sistema.AddBlock(bloco);
                     break;
                 case 4:
+                    System.out.println("# Transferência #");
                     
+                    break;
+                case 5:
+                    System.out.println("# Depósito #");
+                    
+                    int contab;
+                    int agenciab;
+                    
+                    System.out.println("Entre com a agência");
+                    agenciab = ler.nextInt();
+                    System.out.println("Entre com a conta");
+                    contab = ler.nextInt();
+                    
+                    conta1 = tb.BuscarConta(sistema, agenciab, contab);
+                    
+                    if(conta1 == null)
+                    {
+                        System.out.println("Conta não encontrada");
+                        break;
+                    }
+                    
+                    System.out.println(conta1.toString());
                     break;
                 default:
                     System.out.println("Opção não cadastrada");
@@ -86,6 +140,7 @@ public class TesteBanco {
             
             MenuOperacoes();
             opcao = ler.nextInt();
+            //System.out.print("Opcao: " + opcao);
         }
         
         sistema.Print();

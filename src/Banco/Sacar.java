@@ -18,12 +18,11 @@ public class Sacar {
     
     @Override
     public String toString() {
-        return "# Saque #"+
-                "\nAgencia: "+mConta.GetAgencia()+
-                "\nConta: "+mConta.GetConta()+
-                "\nData: "+new Date(mData)+
-                "\nSaldo anterior: "+mSaldoAnterior+
-                "\nSaque: "+mValor+
-                "\nSaldo atual: "+mConta.GetSaldo();
+        return "\nAgencia: "+mConta.GetAgencia()+
+               "\nConta: "+mConta.GetConta()+
+               "\nData: "+new Date(mData)+
+               "\nSaldo anterior: "+mSaldoAnterior+
+               "\nSaque: "+mValor+
+               "\nSaldo atual: "+mConta.GetSaldo();
     }
 }

@@ -1,5 +1,7 @@
 package Banco;
 
+import java.util.Date;
+
 public class Conta {
     private final int mAgencia;
     private final int mConta;
@@ -33,5 +35,12 @@ public class Conta {
 
     public double GetSaldo() {
         return mSaldo;
+    }
+    
+    @Override
+    public String toString() {
+        return "\nAgencia: "+this.GetAgencia()+
+               "\nConta: "+this.GetConta()+
+               "\nSaldo: "+this.GetSaldo();
     }
 }
