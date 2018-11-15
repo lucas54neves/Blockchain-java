@@ -60,12 +60,12 @@ public final class Block {
    
     public void Imprimir() {
         System.out.println();
+        System.out.println("#### Bloco " + mIndex + " ####");
+        //System.out.println("Hash anterior: " + mPreviousHash);
+        //System.out.println("Data de criação do bloco: " + new Date(mTimeStamp));
+        //System.out.println("Hash atual: " + mHash);
+        //System.out.println("## Dados do Bloco: ##\n"+(this.mData.getClass().cast(this.mData)).toString());
+        System.out.println((this.mData.getClass().cast(this.mData)).toString());
         System.out.println("########################");
-        System.out.println("Bloco " + mIndex);
-        System.out.println("Hash anterior: " + mPreviousHash);
-        System.out.println("Data de criação do bloco: " + new Date(mTimeStamp));
-        System.out.println("Hash atual: " + mHash);
-        System.out.println("## Dados do Bloco: ##\n"+(this.mData.getClass().cast(this.mData)).toString());
-              
     }
 }
