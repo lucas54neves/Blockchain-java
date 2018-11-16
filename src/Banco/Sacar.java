@@ -1,10 +1,10 @@
 package Banco;
 
-import java.util.Date;
+import java.util.*;
 
 public class Sacar {
     private final Conta mConta;
-    private final long mData;
+    private final Date mData;
     private final double mSaldoAnterior;
     private final double mValor;
 
@@ -13,13 +13,13 @@ public class Sacar {
         this.mSaldoAnterior = conta.GetSaldo();
         this.mValor = valor;
         
+        Calendar calendario = new GregorianCalendar();
+        Date data = new Date();
+        calendario.setTime(data);
+        this.mData = calendario.getTime();
+        
         if (this.mConta.GetSaldo() >= this.mValor) {
             this.mConta.Sacar(this.mValor);
-            this.mData = new Date().getTime();
-        } else {
-            this.mData = 0; // Seria essa a melhor opção?
-            System.out.println("Saque inválido.");
-            System.out.println("O saldo da conta é insuficiente.");
         }
     }
     
@@ -27,11 +27,15 @@ public class Sacar {
         return mConta;
     }
     
+    public Date GetData() {
+        return mData;
+    }
+    
     @Override
     public String toString() {
         return "Agencia: "+mConta.GetAgencia()+
                "\nConta: "+mConta.GetConta()+
-               "\nData: "+new Date(mData)+
+               "\nData: "+mData+
                "\nSaldo anterior: "+mSaldoAnterior+
                "\nSaque: "+mValor+
                "\nSaldo atual: "+mConta.GetSaldo();

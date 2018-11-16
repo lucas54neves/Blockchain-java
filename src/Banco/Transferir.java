@@ -6,7 +6,7 @@ public class Transferir {
     // Atributos
     private final Conta mContaOrigem;
     private final Conta mContaDestino;
-    private final long mData;
+    private final Date mData;
     private final Double mValor;
     private final Double mSaldoAnteriorOrigem;
     private final Double mSaldoAnteriorDestino;
@@ -19,12 +19,16 @@ public class Transferir {
         this.mSaldoAnteriorOrigem = mContaOrigem.GetSaldo();
         this.mSaldoAnteriorDestino = mContaDestino.GetSaldo();
         
+        Calendar calendario = new GregorianCalendar();
+        Date data = new Date();
+        calendario.setTime(data);
+        this.mData = calendario.getTime();
+        
         if (this.mContaOrigem.GetSaldo() >= this.mValor) {
             this.mContaOrigem.Sacar(mValor);
             this.mContaDestino.Depositar(mValor);
-            this.mData = new Date().getTime();
         } else {
-            this.mData = 0;
+            // this.mData = 0; ?????
             System.out.println("Transferência inválida.");
             System.out.println("O saldo da conta de origem é insuficiente.");
         }
@@ -36,6 +40,10 @@ public class Transferir {
     
     public Conta GetContaDestino() {
         return this.mContaDestino;
+    }
+    
+    public Date GetData() {
+        return mData;
     }
     
     @Override
@@ -52,6 +60,6 @@ public class Transferir {
              "\nSaldo atual: "+mContaDestino.GetSaldo()+
              "\n# Informações gerais #"+
              "\nValor transferido: "+(this.mValor)+
-             "\nData: "+new Date(mData);
+             "\nData: "+mData;
     }
 }

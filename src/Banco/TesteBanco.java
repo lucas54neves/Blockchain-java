@@ -11,9 +11,9 @@ public class TesteBanco {
         System.out.println("[3] Saque");
         System.out.println("[4] Transferência");
         System.out.println("[5] Saldo");
+        System.out.println("[6] Extrato");
         System.out.println("[0] Sair");
-    }
-    
+    } 
    
     public Conta BuscarConta(Blockchain sistema, int agencia, int conta) {
         for (int i = sistema.size()-1; i > 0; i--) {
@@ -42,6 +42,35 @@ public class TesteBanco {
             }
         }
         return null;
+    }
+    
+    public void Extrato(Blockchain sistema, Conta buscada, Calendar dataInicial, Calendar dataFinal) {
+        for (int i = sistema.size()-1; i > 0; i--) {
+            Object transacao = sistema.GetBlock(i).GetData();
+    
+            Date data;
+            Conta conta3, conta4;
+            if (transacao instanceof Depositar) {
+                data = ((Depositar) transacao).GetData();
+                conta3 = ((Depositar) transacao).GetConta();
+                conta4 = null;
+            } else if (transacao instanceof Sacar) {
+                data = ((Sacar) transacao).GetData();
+                conta3 = ((Sacar) transacao).GetConta();
+                conta4 = null;
+            } else /*if (transacao instanceof Transferir)*/ {
+                data = ((Transferir) transacao).GetData();
+                conta3 = ((Transferir) transacao).GetContaOrigem();
+                conta4 = ((Transferir) transacao).GetContaDestino();
+            }
+            
+            if (conta3 != null && conta3.GetAgencia() == buscada.GetAgencia() && conta3.GetConta() == buscada.GetConta() || 
+                    conta4 != null && conta4.GetAgencia() == buscada.GetAgencia() && conta4.GetConta() == buscada.GetConta()) {
+                if (data.after(dataInicial.getTime()) && data.before(dataFinal.getTime())) {
+                sistema.GetBlock(i).Imprimir();
+            }
+            }
+        }
     }
     
     public static void main(String[] args) {
@@ -408,6 +437,40 @@ public class TesteBanco {
 
                         System.out.println(conta1.toString());
                         break;
+                    case 6:
+                        System.out.println("# Extrato #");
+                        
+                        int contaBuscada;
+                        int agenciaBuscada;
+
+                        System.out.println("Entre com a agência");
+                        agenciaBuscada = ler.nextInt();
+                        System.out.println("Entre com a conta");
+                        contaBuscada = ler.nextInt();
+
+                        conta1 = tb.BuscarConta(sistema, agenciaBuscada, contaBuscada);
+
+                        if(conta1 == null)
+                        {
+                            System.out.println("Conta não encontrada");
+                            break;
+                        }
+                        
+                        int mes, ano;
+                        
+                        System.out.println("Entre com o ano");
+                        ano = ler.nextInt();
+                        System.out.println("Entre com o mês");
+                        mes = ler.nextInt();
+                        
+                        Calendar dataInicial = Calendar.getInstance();
+                        Calendar dataFinal = Calendar.getInstance();
+                        
+                        dataInicial.set(ano, mes, 1);
+                        dataFinal.set(ano, mes, 31);
+                        
+                        tb.Extrato(sistema, conta1, dataInicial, dataFinal);
+                        break;
                     default:
                         System.out.println("Opção não cadastrada");
                         break;
@@ -416,8 +479,6 @@ public class TesteBanco {
                 MenuOperacoes();
                 opcao = ler.nextInt();
             }
-            
-            sistema.Print();
         }
     }
 }
