@@ -466,8 +466,8 @@ public class TesteBanco {
                         Calendar dataInicial = Calendar.getInstance();
                         Calendar dataFinal = Calendar.getInstance();
                         
-                        dataInicial.set(ano, mes, 1);
-                        dataFinal.set(ano, mes, 31);
+                        dataInicial.set(ano, mes-1, 5);
+                        dataFinal.set(ano, mes, 4);
                         
                         tb.Extrato(sistema, conta1, dataInicial, dataFinal);
                         break;
