@@ -2,8 +2,12 @@ package Banco;
 
 import blockchain.*;
 import java.util.*;
+import java.time.*;
+import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class TesteBanco {
+public class Sistema {
     public static void MenuOperacoes() {
         System.out.println("Entre com a operação desejada:");
         System.out.println("[1] Abrir conta");
@@ -44,7 +48,7 @@ public class TesteBanco {
         return null;
     }
     
-    public void Extrato(Blockchain sistema, Conta buscada, Calendar dataInicial, Calendar dataFinal) {
+    public void Extrato(Blockchain sistema, Conta buscada, Date dataInicial, Date dataFinal) {
         for (int i = sistema.size()-1; i > 0; i--) {
             Object transacao = sistema.GetBlock(i).GetData();
     
@@ -66,9 +70,9 @@ public class TesteBanco {
             
             if (conta3 != null && conta3.GetAgencia() == buscada.GetAgencia() && conta3.GetConta() == buscada.GetConta() || 
                     conta4 != null && conta4.GetAgencia() == buscada.GetAgencia() && conta4.GetConta() == buscada.GetConta()) {
-                if (data.after(dataInicial.getTime()) && data.before(dataFinal.getTime())) {
-                sistema.GetBlock(i).Imprimir();
-            }
+                if (data.after(dataInicial) && data.before(dataFinal)) {
+                    sistema.GetBlock(i).Imprimir();
+                }
             }
         }
     }
@@ -81,7 +85,7 @@ public class TesteBanco {
         Depositar depositoInicial, deposito;
         Sacar saque;
         Transferir transferencia;
-        TesteBanco tb = new TesteBanco();
+        Sistema tb = new Sistema();
         Scanner ler = new Scanner(System.in);
         int opcao;
         
@@ -336,148 +340,155 @@ public class TesteBanco {
             opcao = ler.nextInt();
 
             while (opcao != 0) {
-                switch(opcao) {
-                    case 1:
-                        System.out.println("# Abertura de conta #");
-
-                        int agenciaNova;
-                        int contaNova;
-                        double primeiroDeposito;
-
-                        System.out.println("Entre com a agência");
-                        agenciaNova = ler.nextInt();
-                        System.out.println("Entre com a conta");
-                        contaNova = ler.nextInt();
-                        System.out.println("Entre com o valor do primeiro depósito");
-                        primeiroDeposito = ler.nextDouble();
-
-                        conta1 = new Conta(agenciaNova, contaNova);
-
-                        depositoInicial = new Depositar(conta1, primeiroDeposito);
-                        bloco = new Block (depositoInicial, sistema.GetLastBlock().GetHash(), sistema.size()+1);
-                        sistema.AddBlock(bloco);
-                        break;
-                    case 2:
-                        System.out.println("# Depósito #");
-
-                        int contaDeposito;
-                        int agenciaDeposito;
-                        double valorDeposito;
-
-                        System.out.println("Entre com a agência");
-                        agenciaDeposito = ler.nextInt();
-                        System.out.println("Entre com a conta");
-                        contaDeposito = ler.nextInt();
-
-                        conta1 = tb.BuscarConta(sistema, agenciaDeposito, contaDeposito);
-
-                        if(conta1 == null)
-                        {
-                            System.out.println("Conta não encontrada");
+                try {
+                    switch(opcao) {
+                        case 1:
+                            System.out.println("# Abertura de conta #");
+                            
+                            int agenciaNova;
+                            int contaNova;
+                            double primeiroDeposito;
+                            
+                            System.out.println("Entre com a agência");
+                            agenciaNova = ler.nextInt();
+                            System.out.println("Entre com a conta");
+                            contaNova = ler.nextInt();
+                            System.out.println("Entre com o valor do primeiro depósito");
+                            primeiroDeposito = ler.nextDouble();
+                            
+                            conta1 = new Conta(agenciaNova, contaNova);
+                            
+                            depositoInicial = new Depositar(conta1, primeiroDeposito);
+                            bloco = new Block (depositoInicial, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                            sistema.AddBlock(bloco);
                             break;
-                        }
-
-                        System.out.println("Entre com o valor a depositar");
-                        valorDeposito = ler.nextDouble();
-
-                        Depositar dep = new Depositar(conta1, valorDeposito);
-                        bloco = new Block (dep, sistema.GetLastBlock().GetHash(), sistema.size()+1);
-                        sistema.AddBlock(bloco);
-
-                        break;
-                    case 3:
-                        System.out.println("# Saque #");
-
-                        int agenciaSaque;
-                        int contaSaque;
-                        double valorSaque;
-
-                        System.out.println("Entre com a agência");
-                        agenciaSaque = ler.nextInt();
-                        System.out.println("Entre com a conta");
-                        contaSaque = ler.nextInt();
-
-                        conta1 = tb.BuscarConta(sistema, agenciaSaque, contaSaque);
-
-                        if(conta1 == null)
-                        {
-                            System.out.println("Conta não encontrada");
+                        case 2:
+                            System.out.println("# Depósito #");
+                            
+                            int contaDeposito;
+                            int agenciaDeposito;
+                            double valorDeposito;
+                            
+                            System.out.println("Entre com a agência");
+                            agenciaDeposito = ler.nextInt();
+                            System.out.println("Entre com a conta");
+                            contaDeposito = ler.nextInt();
+                            
+                            conta1 = tb.BuscarConta(sistema, agenciaDeposito, contaDeposito);
+                            
+                            if(conta1 == null)
+                            {
+                                System.out.println("Conta não encontrada");
+                                break;
+                            }
+                            
+                            System.out.println("Entre com o valor a depositar");
+                            valorDeposito = ler.nextDouble();
+                            
+                            Depositar dep = new Depositar(conta1, valorDeposito);
+                            bloco = new Block (dep, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                            sistema.AddBlock(bloco);
+                            
                             break;
-                        }
-
-                        System.out.println("Entre com o valor para sacar");
-                        valorSaque = ler.nextDouble();
-
-                        Sacar saq = new Sacar(conta1, valorSaque);
-                        bloco = new Block (saq, sistema.GetLastBlock().GetHash(), sistema.size()+1);
-                        sistema.AddBlock(bloco);
-                        break;
-                    case 4:
-                        System.out.println("# Transferência #");
-
-                        break;
-                    case 5:
-                        System.out.println("# Saldo #");
-
-                        int contab;
-                        int agenciab;
-
-                        System.out.println("Entre com a agência");
-                        agenciab = ler.nextInt();
-                        System.out.println("Entre com a conta");
-                        contab = ler.nextInt();
-
-                        conta1 = tb.BuscarConta(sistema, agenciab, contab);
-
-                        if(conta1 == null)
-                        {
-                            System.out.println("Conta não encontrada");
+                        case 3:
+                            System.out.println("# Saque #");
+                            
+                            int agenciaSaque;
+                            int contaSaque;
+                            double valorSaque;
+                            
+                            System.out.println("Entre com a agência");
+                            agenciaSaque = ler.nextInt();
+                            System.out.println("Entre com a conta");
+                            contaSaque = ler.nextInt();
+                            
+                            conta1 = tb.BuscarConta(sistema, agenciaSaque, contaSaque);
+                            
+                            if(conta1 == null)
+                            {
+                                System.out.println("Conta não encontrada");
+                                break;
+                            }
+                            
+                            System.out.println("Entre com o valor para sacar");
+                            valorSaque = ler.nextDouble();
+                            
+                            Sacar saq = new Sacar(conta1, valorSaque);
+                            bloco = new Block (saq, sistema.GetLastBlock().GetHash(), sistema.size()+1);
+                            sistema.AddBlock(bloco);
                             break;
-                        }
-
-                        System.out.println(conta1.toString());
-                        break;
-                    case 6:
-                        System.out.println("# Extrato #");
-                        
-                        int contaBuscada;
-                        int agenciaBuscada;
-
-                        System.out.println("Entre com a agência");
-                        agenciaBuscada = ler.nextInt();
-                        System.out.println("Entre com a conta");
-                        contaBuscada = ler.nextInt();
-
-                        conta1 = tb.BuscarConta(sistema, agenciaBuscada, contaBuscada);
-
-                        if(conta1 == null)
-                        {
-                            System.out.println("Conta não encontrada");
+                        case 4:
+                            System.out.println("# Transferência #");
+                            
                             break;
-                        }
-                        
-                        int mes, ano;
-                        
-                        System.out.println("Entre com o ano");
-                        ano = ler.nextInt();
-                        System.out.println("Entre com o mês");
-                        mes = ler.nextInt();
-                        
-                        Calendar dataInicial = Calendar.getInstance();
-                        Calendar dataFinal = Calendar.getInstance();
-                        
-                        dataInicial.set(ano, mes, 1);
-                        dataFinal.set(ano, mes, 31);
-                        
-                        tb.Extrato(sistema, conta1, dataInicial, dataFinal);
-                        break;
-                    default:
-                        System.out.println("Opção não cadastrada");
-                        break;
+                        case 5:
+                            System.out.println("# Saldo #");
+                            
+                            int contab;
+                            int agenciab;
+                            
+                            System.out.println("Entre com a agência");
+                            agenciab = ler.nextInt();
+                            System.out.println("Entre com a conta");
+                            contab = ler.nextInt();
+                            
+                            conta1 = tb.BuscarConta(sistema, agenciab, contab);
+                            
+                            if(conta1 == null)
+                            {
+                                System.out.println("Conta não encontrada");
+                                break;
+                            }
+                            
+                            System.out.println(conta1.toString());
+                            break;
+                        case 6:
+                            System.out.println("# Extrato #");
+                            
+                            int contaBuscada;
+                            int agenciaBuscada;
+                            
+                            System.out.println("Entre com a agência");
+                            agenciaBuscada = ler.nextInt();
+                            System.out.println("Entre com a conta");
+                            contaBuscada = ler.nextInt();
+                            
+                            conta1 = tb.BuscarConta(sistema, agenciaBuscada, contaBuscada);
+                            
+                            if(conta1 == null)
+                            {
+                                System.out.println("Conta não encontrada");
+                                break;
+                            }
+                            
+                            int mes, ano;
+                            
+                            System.out.println("Entre com o ano");
+                            ano = ler.nextInt();
+                            System.out.println("Entre com o mês");
+                            mes = ler.nextInt();
+                            
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                           
+                            Date dataInicial = formatter.parse(new String("01-"+mes+"-"+ano));
+                                                        
+                            YearMonth mesAno = YearMonth.of(ano, mes);
+                            //Date dataFinal = formatter.parse(new String(mesAno.lengthOfMonth()+"-"+mes+"-"+ano));        
+                            Date dataFinal = formatter.parse(new String("01-"+(mes+1)+"-"+ano));
+                            System.out.println(dataInicial);
+                            System.out.println(dataFinal);
+                            //tb.Extrato(sistema, conta1, dataInicial, dataFinal);
+                            break;
+                        default:
+                            System.out.println("Opção não cadastrada");
+                            break;
+                    }
+                    
+                    MenuOperacoes();
+                    opcao = ler.nextInt();
+                } catch (ParseException ex) {
+                    Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                MenuOperacoes();
-                opcao = ler.nextInt();
             }
         }
     }

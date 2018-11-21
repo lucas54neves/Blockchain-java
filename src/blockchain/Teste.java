@@ -1,7 +1,6 @@
 package blockchain;
 
-import Model.*;
-import blockchain.*;
+import Banco.*;
 import java.util.*;
 
 public class Teste {
@@ -33,30 +32,6 @@ public class Teste {
         } else {
             System.out.println("Blockchain inválida\n");
         }
-        Object teste = new Date("01/01/2018");
-        System.out.println(teste.getClass());
-        
-        
-        Depositar dep = new Depositar(123, 456, new Date().getTime(), 30.0, 25.0);
-        Block bloco = new Block(dep, chain.GetLastBlock().GetHash(), chain.size()+1);
-        chain.AddBlock(bloco);
-        
-        dep  = new Depositar(123, 456, new Date().getTime(), 55.0, 30.0);
-        bloco = new Block(dep, chain.GetLastBlock().GetHash(), chain.size()+1);
-        chain.AddBlock(bloco);
-        
-        Sacar saq = new Sacar(123, 456, new Date().getTime(), 30.0, 25.0);
-        bloco = new Block(saq, chain.GetLastBlock().GetHash(), chain.size()+1);
-        chain.AddBlock(bloco);
-        
-        saq  = new Sacar(123, 456, new Date().getTime(), 55.0, 30.0);
-        bloco = new Block(saq, chain.GetLastBlock().GetHash(), chain.size()+1);
-        chain.AddBlock(bloco);
-        
-        
-        Transferir tra =  new Transferir(123, 124, 12345, 12346, new Date().getTime(), 345.0, 235.0, 100.0);
-        bloco = new Block(tra, chain.GetLastBlock().GetHash(), chain.size()+1);
-        chain.AddBlock(bloco);
         
         chain.Print();
     }

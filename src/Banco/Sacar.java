@@ -12,11 +12,7 @@ public class Sacar {
         this.mConta = conta;
         this.mSaldoAnterior = conta.GetSaldo();
         this.mValor = valor;
-        
-        Calendar calendario = new GregorianCalendar();
-        Date data = new Date();
-        calendario.setTime(data);
-        this.mData = calendario.getTime();
+        this.mData = new Date();
         
         if (this.mConta.GetSaldo() >= this.mValor) {
             this.mConta.Sacar(this.mValor);

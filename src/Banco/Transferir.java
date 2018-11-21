@@ -18,11 +18,7 @@ public class Transferir {
         this.mValor = mValor;
         this.mSaldoAnteriorOrigem = mContaOrigem.GetSaldo();
         this.mSaldoAnteriorDestino = mContaDestino.GetSaldo();
-        
-        Calendar calendario = new GregorianCalendar();
-        Date data = new Date();
-        calendario.setTime(data);
-        this.mData = calendario.getTime();
+        this.mData = new Date();
         
         if (this.mContaOrigem.GetSaldo() >= this.mValor) {
             this.mContaOrigem.Sacar(mValor);

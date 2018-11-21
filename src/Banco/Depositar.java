@@ -13,11 +13,7 @@ public class Depositar {
         this.mValor = valor;
         this.mSaldoAnterior = conta.GetSaldo();
         this.mConta.Depositar(valor);
-        
-        Calendar calendario = new GregorianCalendar();
-        Date data = new Date();
-        calendario.setTime(data);
-        this.mData = calendario.getTime();
+        this.mData = new Date();
     }
     
     public Conta GetConta() {
