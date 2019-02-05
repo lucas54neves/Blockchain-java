@@ -1,6 +1,7 @@
 package Banco;
 
-import blockchain.*;
+import Chain.Block;
+import Chain.Blockchain;
 import java.util.*;
 import java.time.*;
 import java.text.*;
