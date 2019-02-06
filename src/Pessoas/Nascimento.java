@@ -1,7 +1,9 @@
 package Pessoas;
-import java.util.*;
 
-public final class Nascimento {
+import java.util.*;
+import Negocio.*;
+
+public final class Nascimento implements Operacoes {
     private Date dataRegistro;
     private Date dataNascimento;
     private Pessoa pai;
@@ -54,5 +56,15 @@ public final class Nascimento {
 
     public void setIndividuo(Pessoa individuo) {
         this.individuo = individuo;
+    }
+    
+    @Override
+    public String Buscar() {
+        return "\nData do Registro: " + getDataRegistro() +
+             "\nData do Nascimento: " + getDataNascimento() +
+             "\nPai: " + getPai().getNome() +
+             "\nMae: " + getMae().getNome() +
+             "\nCriança: " + getIndividuo().getNome() +
+             "\n";
     }
 }

@@ -1,8 +1,9 @@
 package Pessoas;
 
 import java.util.Date;
+import Negocio.*;
 
-public final class Morte {
+public final class Morte implements Operacoes {
     private Date dataRegistro;
     private Date dataMorte;
     private Pessoa falecido;
@@ -36,5 +37,13 @@ public final class Morte {
 
     public void setFalecido(Pessoa falecido) {
         this.falecido = falecido;
+    }
+    
+    @Override
+    public String Buscar() {
+        return "\nData do Registro: " + getDataRegistro() +
+               "\nData da Morte: " + getDataMorte() +
+               "\nFalecido: " + getFalecido().getNome() +
+               "\n";
     }
 }

@@ -1,8 +1,9 @@
 package Pessoas;
 
 import java.util.Date;
+import Negocio.*;
 
-public class Casamento {
+public class Casamento implements Operacoes {
     private Date dataRegistro;
     private Date dataCasamento;
     private Pessoa conjuge1;
@@ -47,5 +48,12 @@ public class Casamento {
         this.conjuge2 = conjuge2;
     }
     
-    
+    @Override
+    public String Buscar() {
+        return "\nData do Registro: " + getDataRegistro() +
+               "\nData do Casamento: " + getDataCasamento()+
+               "\nconjuge1: " + getConjuge1().getNome() +
+               "\nconjuge2: " + getConjuge2().getNome() +
+               "\n";
+    }
 }
