@@ -1,6 +1,5 @@
 package Chain;
 
-import Banco.*;
 import java.util.*;
 
 public class Teste {

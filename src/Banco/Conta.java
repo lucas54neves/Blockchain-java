@@ -1,46 +1,54 @@
 package Banco;
 
-import java.util.Date;
+import CartorioCivil.*;
 
-public class Conta {
-    private final int mAgencia;
-    private final int mConta;
-    private double mSaldo;
+public class Conta{
+    Pessoa titular;
+    double saldo;
+    int agencia, conta;
 
-    public Conta(int mAgencia, int mConta) {
-        this.mAgencia = mAgencia;
-        this.mConta = mConta;
-        this.mSaldo = 0.0;
+    public Conta(Pessoa titular, int agencia, int conta) {
+        this.titular = titular;
+        this.agencia = agencia;
+        this.conta = conta;
+        this.saldo = 0;
+    }
+
+    public Pessoa getTitular() {
+        return titular;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public int getAgencia() {
+        return agencia;
+    }
+
+    public int getConta() {
+        return conta;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
     
-    public void Depositar(double valor) {
-        this.mSaldo = this.mSaldo + valor;
+    public void sacar(double valor) {
+        this.setSaldo(this.getSaldo() - valor);
     }
     
-    public void Sacar(double valor) {
-        if (valor > this.mSaldo) {
-            System.out.println("Saldo insuficienteSaque");
-        } else {
-            this.mSaldo = this.mSaldo - valor;
-        }
-    }
-
-    public int GetAgencia() {
-        return mAgencia;
-    }
-
-    public int GetConta() {
-        return mConta;
-    }
-
-    public double GetSaldo() {
-        return mSaldo;
+    public void depositar(double valor) {
+        this.setSaldo(this.getSaldo() + valor);
     }
     
     @Override
     public String toString() {
-        return "\nAgencia: "+this.GetAgencia()+
-               "\nConta: "+this.GetConta()+
-               "\nSaldo: "+this.GetSaldo();
+        return "## Conta ##" +
+                "\nTitular: " + this.getTitular().getNome() +
+                "\nAgência: " + this.getAgencia() +
+                "\nConta: " + this.getConta() +
+                "\nSaldo: " + this.getSaldo() +
+                "\n";
     }
 }
