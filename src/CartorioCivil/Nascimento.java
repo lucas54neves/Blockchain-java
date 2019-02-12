@@ -61,11 +61,12 @@ public class Nascimento implements Operacoes{
     
     public String toString() {
         return "# Nascimento #" +
-             "\nNome da criança: " + this.getNome() +
-             "\nNome do pai: " + this.getPai().getNome() +
-             "\nNome da mãe: " + this.getMae().getNome() +
-             "\nData do registro: " + this.getDataRegistro() +
-             "\nData do nascimento: " + this.getDataNascimento() +
-             "\nSexo da criança: " + this.getSexo();
+                "\nNome da criança: " + this.getNome() +
+                "\nNome do pai: " + this.getPai().getNome() +
+                "\nNome da mãe: " + this.getMae().getNome() +
+                "\nData do registro: " + this.getDataRegistro() +
+                "\nData do nascimento: " + this.getDataNascimento() +
+                "\nSexo da criança: " + this.getSexo() +
+                "\n";
     }
 }

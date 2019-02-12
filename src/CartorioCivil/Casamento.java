@@ -43,8 +43,9 @@ public class Casamento implements Operacoes{
     @Override
     public String toString() {
         return "# Casamento #" +
-             "\nNome dos cônjuges: " + this.getConjuge1().getNome() + " e " + this.getConjuge2().getNome() +
-             "\nData do registro: " + this.getDataRegistro() +
-             "\nData do casamento: " + this.getDataCasamento();
+                "\nNome dos cônjuges: " + this.getConjuge1().getNome() + " e " + this.getConjuge2().getNome() +
+                "\nData do registro: " + this.getDataRegistro() +
+                "\nData do casamento: " + this.getDataCasamento() +
+                "\n";
     }
 }

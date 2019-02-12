@@ -38,8 +38,9 @@ public class Morte implements Operacoes{
     @Override
     public String toString() {
         return "# Morte #" +
-             "\nNome do falecido: " + this.getFacelido().getNome() +
-             "\nData do registro: " + this.getDataRegistro() +
-             "\nData da morte: " + this.getDataMorte();
+                "\nNome do falecido: " + this.getFacelido().getNome() +
+                "\nData do registro: " + this.getDataRegistro() +
+                "\nData da morte: " + this.getDataMorte() +
+                "\n";
     }
 }

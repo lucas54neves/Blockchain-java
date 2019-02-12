@@ -51,5 +51,16 @@ public class Pessoa {
         return dataMorte;
     }
 
-    
+    @Override
+    public String toString() {
+        return "## Pessoa ##" +
+                "\nNome: " + this.getNome() +
+                "\nCPF: " + this.getCpf() +
+                "\nSexo: " + this.getSexo()+
+                "\nEstado civil: " + this.getEstadoCivil() +
+                "\nPai: " + this.getPai().getNome() +
+                "\nMãe: " + this.getMae().getNome() +
+                "\nData nascimento: " + this.getDataNascimento() +
+                "\n";
+    }
 }
