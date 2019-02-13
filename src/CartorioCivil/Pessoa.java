@@ -53,14 +53,28 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "## Pessoa ##" +
-                "\nNome: " + this.getNome() +
-                "\nCPF: " + this.getCpf() +
-                "\nSexo: " + this.getSexo()+
-                "\nEstado civil: " + this.getEstadoCivil() +
-                "\nPai: " + this.getPai().getNome() +
-                "\nMãe: " + this.getMae().getNome() +
-                "\nData nascimento: " + this.getDataNascimento() +
-                "\n";
+        String retorno = "";
+        
+        retorno = "## Pessoa ##";
+        retorno = retorno + "\nNome: " + this.getNome();
+        retorno = retorno + "\nCPF: " + this.getCpf();
+        retorno = retorno + "\nSexo: " + this.getSexo();
+        retorno = retorno + "\nEstado civil: " + this.getEstadoCivil();
+        retorno = retorno + "\nPai: ";
+        if (this.getPai() != null) {
+            retorno = retorno + (this.getPai().getNome());
+        } else {
+            retorno = retorno + "***";
+        }
+        retorno = retorno + "\nMãe: ";
+        if (this.getMae() != null) {
+            retorno = retorno + (this.getMae().getNome());
+        } else {
+            retorno = retorno + "***";
+        }
+        retorno = retorno + "\nData nascimento: " + this.getDataNascimento();
+        retorno = retorno + "\n";
+        
+        return retorno;
     }
 }
