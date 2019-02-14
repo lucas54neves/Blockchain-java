@@ -2,7 +2,7 @@ package CartorioCivil;
 
 import java.util.Date;
 
-public class Morte implements Operacoes{
+public class Morte implements OperacoesCivis{
     Pessoa facelido;
     Date dataRegistro, dataMorte;
 
@@ -23,8 +23,6 @@ public class Morte implements Operacoes{
     public Date getDataMorte() {
         return dataMorte;
     }
-    
-    
     
     @Override
     public Pessoa retornaPessoa(int cpf) {

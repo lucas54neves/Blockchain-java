@@ -73,4 +73,24 @@ public class Saque implements OperacoesFinanceiras {
                 "\nOperação realizada: " + this.isOperacaoRealizada() +
                 "\n";
     }
+    
+    @Override
+    public Conta retornaConta(Pessoa titular) {
+        
+    }
+    
+    @Override
+    public Pessoa retornaTitular(Conta conta) {
+        
+    }
+    
+    @Override
+    public Conta retornaConta(int cpf) {
+        
+    }
+    
+    @Override
+    public Pessoa retornaTitular(int cpf) {
+        
+    }
 }

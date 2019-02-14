@@ -1,5 +1,5 @@
 package CartorioCivil;
 
-public interface Operacoes {
+public interface OperacoesCivis {
     Pessoa retornaPessoa(int cpf);
 }

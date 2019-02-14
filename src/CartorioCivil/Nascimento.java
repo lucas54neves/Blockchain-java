@@ -2,7 +2,7 @@ package CartorioCivil;
 
 import java.util.Date;
 
-public class Nascimento implements Operacoes{
+public class Nascimento implements OperacoesCivis{
     Pessoa individuo, pai, mae;
     Date dataNascimento, dataRegistro;
     String nome, sexo;

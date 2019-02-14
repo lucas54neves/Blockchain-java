@@ -51,6 +51,10 @@ public class Pessoa {
         return dataMorte;
     }
 
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
     @Override
     public String toString() {
         String retorno = "";

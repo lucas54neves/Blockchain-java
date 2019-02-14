@@ -1,5 +1,6 @@
 package Banco;
 
+import CartorioCivil.*;
 import java.util.*;
 
 public class Deposito implements OperacoesFinanceiras {
@@ -83,5 +84,41 @@ public class Deposito implements OperacoesFinanceiras {
                 "\nSaldo atual: " + this.getSaldoAtual() +
                 "\nOperação realizada: " + this.isOperacaoRealizada() +
                 "\n";
+    }
+    
+    @Override
+    public Conta retornaConta(Pessoa titular) {
+        if (this.getContaDestino().getTitular() == titular) {
+            return this.getContaDestino();
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    public Pessoa retornaTitular(Conta conta) {
+        if (this.getContaDestino() == conta) {
+            return this.getContaDestino().getTitular();
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    public Conta retornaConta(int cpf) {
+        if (this.getContaDestino().getTitular().getCpf() == cpf) {
+            return this.getContaDestino();
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    public Pessoa retornaTitular(int cpf) {
+        if (this.getContaDestino().getTitular().getCpf() == cpf) {
+            return this.getContaDestino().getTitular();
+        } else {
+            return null;
+        }
     }
 }
