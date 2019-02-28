@@ -34,5 +34,11 @@ public class Teste {
         Transferencia transf2 = new Transferencia(conta1, conta2, 130.4);
         
         System.out.println(transf2);
+        
+        /*
+        Object obj = transf2;
+        
+        obj.retornaTitular(conta1);
+        */
     }
 }
