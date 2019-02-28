@@ -1,5 +1,6 @@
 package Banco;
 
+import CartorioCivil.Pessoa;
 import java.util.*;
 
 public class Saque implements OperacoesFinanceiras {
@@ -76,21 +77,37 @@ public class Saque implements OperacoesFinanceiras {
     
     @Override
     public Conta retornaConta(Pessoa titular) {
-        
+        if (this.getContaOrigem().getTitular() == titular) {
+            return this.getContaOrigem();
+        } else {
+            return null;
+        }
     }
     
     @Override
     public Pessoa retornaTitular(Conta conta) {
-        
+        if (this.getContaOrigem() == conta) {
+            return this.getContaOrigem().getTitular();
+        } else {
+            return null;
+        }
     }
     
     @Override
     public Conta retornaConta(int cpf) {
-        
+        if (this.getContaOrigem().getTitular().getCpf() == cpf) {
+            return this.getContaOrigem();
+        } else {
+            return null;
+        }
     }
     
     @Override
     public Pessoa retornaTitular(int cpf) {
-        
+        if (this.getContaOrigem().getTitular().getCpf() == cpf) {
+            return this.getContaOrigem().getTitular();
+        } else {
+            return null;
+        }
     }
 }

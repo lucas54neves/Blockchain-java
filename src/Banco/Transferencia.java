@@ -1,5 +1,6 @@
 package Banco;
 
+import CartorioCivil.*;
 import java.util.*;
 
 public class Transferencia implements OperacoesFinanceiras {
@@ -128,21 +129,45 @@ public class Transferencia implements OperacoesFinanceiras {
     
     @Override
     public Conta retornaConta(Pessoa titular) {
-        
+        if (this.getContaDestino().getTitular() == titular) {
+            return this.getContaDestino();
+        } else if (this.getContaOrigem().getTitular() == titular) {
+            return this.getContaOrigem();
+        } else {
+            return null;
+        }
     }
     
     @Override
     public Pessoa retornaTitular(Conta conta) {
-        
+        if (this.getContaDestino() == conta) {
+            return this.getContaDestino().getTitular();
+        } else if (this.getContaOrigem() == conta) {
+            return this.getContaOrigem().getTitular();
+        } else {
+            return null;
+        }
     }
     
     @Override
     public Conta retornaConta(int cpf) {
-        
+        if (this.getContaDestino().getTitular().getCpf() == cpf) {
+            return this.getContaDestino();
+        } else if (this.getContaOrigem().getTitular().getCpf() == cpf) {
+            return this.getContaOrigem();
+        } else {
+            return null;
+        }
     }
     
     @Override
     public Pessoa retornaTitular(int cpf) {
-        
+        if (this.getContaDestino().getTitular().getCpf() == cpf) {
+            return this.getContaDestino().getTitular();
+        } else  if (this.getContaOrigem().getTitular().getCpf() == cpf) {
+            return this.getContaOrigem().getTitular();
+        } else {
+            return null;
+        }
     }
 }
