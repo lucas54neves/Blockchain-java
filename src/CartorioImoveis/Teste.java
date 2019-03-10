@@ -5,11 +5,13 @@ import java.util.Date;
 
 public class Teste {
     public static void main(String[] args) {
-        Pessoa p1 = new Pessoa(123, "Lucas", "M", null, null, new Date());
-        Pessoa p2 = new Pessoa(123, "Yasmin", "F", null, null, new Date());
+        Pessoa p1 = new Pessoa("Lucas", "M", null, null, 123, new Date(), null);
+        Pessoa p2 = new Pessoa("Yasmin", "F", null, null, 234, new Date(), null);
         Imovel casa = new Imovel(p1, 25, "Rua Limpa, 123", 1235.8);
-        System.out.println(casa);
-        casa.vender(p2, 1500);
-        System.out.println(casa);
+        //System.out.println(casa);
+        casa.Vender(p2, 1500);
+        casa.Vender(p2, 500);
+        casa.Vender(p2, 2500);
+        //System.out.println(casa);
     }
 }
