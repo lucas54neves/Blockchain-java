@@ -45,7 +45,7 @@ public class Conta {
     @Override
     public String toString() {
         return "## Conta ##" +
-                "\nTitular: " + this.GetTitular().getNome() +
+                "\nTitular: " + this.GetTitular().GetNome() +
                 "\nAgência: " + this.GetAgencia() +
                 "\nConta: " + this.GetConta() +
                 "\nSaldo: " + this.GetSaldo();

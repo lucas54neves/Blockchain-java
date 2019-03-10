@@ -2,71 +2,31 @@ package CartorioCivil;
 
 import java.util.Date;
 
-public class Nascimento implements OperacoesCivis{
-    Pessoa individuo, pai, mae;
-    Date dataNascimento, dataRegistro;
-    String nome, sexo;
-    int cpf;
-
-    public Nascimento(Pessoa pai, Pessoa mae, Date dataNascimento, String nome, String sexo, int cpf) {
-        this.pai = pai;
-        this.mae = mae;
-        this.dataNascimento = dataNascimento;
-        this.dataRegistro = new Date();
-        this.nome = nome;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.individuo = new Pessoa(cpf, nome, sexo, pai, mae, dataNascimento);
+public class Nascimento {
+    private final Pessoa mIndividuo;
+    private final Date mDataRegistro;
+    
+    public Nascimento(String nome, String sexo, Pessoa pai, Pessoa mae, int cpf, Date dataNascimento) {
+        this.mIndividuo = new Pessoa(nome, sexo, pai, mae, cpf, dataNascimento, null);
+        this.mDataRegistro = new Date();
     }
-
-    public Pessoa getIndividuo() {
-        return individuo;
+    
+    public Pessoa GetIndividuo() {
+        return this.mIndividuo;
     }
-
-    public Pessoa getPai() {
-        return pai;
-    }
-
-    public Pessoa getMae() {
-        return mae;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public Date getDataRegistro() {
-        return dataRegistro;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public int getCpf() {
-        return cpf;
+    
+    public Date GetDataRegistro() {
+        return this.mDataRegistro;
     }
     
     @Override
-    public Pessoa retornaPessoa(int cpf) {
-        if (cpf == this.getIndividuo().getCpf()) {
-            return this.getIndividuo();
-        }
-        return null;
-    }
-    
     public String toString() {
         return "# Nascimento #" +
-                "\nNome da criança: " + this.getNome() +
-                "\nNome do pai: " + this.getPai().getNome() +
-                "\nNome da mãe: " + this.getMae().getNome() +
-                "\nData do registro: " + this.getDataRegistro() +
-                "\nData do nascimento: " + this.getDataNascimento() +
-                "\nSexo da criança: " + this.getSexo() +
-                "\n";
+                "\nNome da criança: " + this.GetIndividuo().GetNome() +
+                "\nNome do pai: " + this.GetIndividuo().GetPai().GetNome() +
+                "\nNome da mãe: " + this.GetIndividuo().GetMae().GetNome() +
+                "\nData do registro: " + this.GetDataRegistro() +
+                "\nData do nascimento: " + this.GetIndividuo().GetDataNascimento() +
+                "\nSexo da criança: " + this.GetIndividuo().GetSexo();
     }
 }

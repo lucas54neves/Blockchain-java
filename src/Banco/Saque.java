@@ -59,7 +59,7 @@ public class Saque {
     @Override
     public String toString() {
         return  "# Saque #" +
-                "\nNome do titular: " + this.GetContaOrigem().GetTitular().getNome() +
+                "\nNome do titular: " + this.GetContaOrigem().GetTitular().GetNome() +
                 "\nAgência: " + this.GetContaOrigem().GetAgencia() +
                 "\nConta: " + this.GetContaOrigem().GetConta() +
                 "\nSaldo anterior: " + this.GetSaldoAnterior() +

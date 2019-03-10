@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Teste {
     public static void main(String[] args) {
-        Pessoa p1 = new Pessoa(123, "lucas", "M", null, null, new Date());
+        Pessoa p1 = new Pessoa("lucas", "M", null, null, 123, new Date(), new Date());
         Block block = new Block(p1, "abs", 1);
         Chain corrente = new Chain();
         corrente.adicionaBloco(block);

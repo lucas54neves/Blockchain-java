@@ -2,43 +2,29 @@ package CartorioCivil;
 
 import java.util.Date;
 
-public class Morte implements OperacoesCivis{
-    Pessoa facelido;
-    Date dataRegistro, dataMorte;
-
-    public Morte(Pessoa facelido, Date dataMorte) {
-        this.facelido = facelido;
-        this.dataMorte = dataMorte;
-        this.dataRegistro = new Date();
-    }
-
-    public Pessoa getFacelido() {
-        return facelido;
-    }
-
-    public Date getDataRegistro() {
-        return dataRegistro;
-    }
-
-    public Date getDataMorte() {
-        return dataMorte;
+public class Morte {
+    private final Pessoa mFacecido;
+    private final Date mDataRegistro;
+    
+    public Morte(Pessoa falecido, Date dataMorte) {
+        this.mFacecido = falecido;
+        this.mFacecido.SetDataMorte(dataMorte);
+        this.mDataRegistro = new Date();
     }
     
-    @Override
-    public Pessoa retornaPessoa(int cpf) {
-        if (cpf == this.getFacelido().getCpf()) {
-            return this.getFacelido();
-        } else {
-            return null;
-        }
+    public Pessoa GetFalecido() {
+        return this.mFacecido;
+    }
+    
+    public Date GetDataRegistro() {
+        return this.mDataRegistro;
     }
     
     @Override
     public String toString() {
         return "# Morte #" +
-                "\nNome do falecido: " + this.getFacelido().getNome() +
-                "\nData do registro: " + this.getDataRegistro() +
-                "\nData da morte: " + this.getDataMorte() +
-                "\n";
+                "\nNome do falecido: " + this.GetFalecido().GetNome() +
+                "\nData do registro: " + this.GetDataRegistro() +
+                "\nData da morte: " + this.GetFalecido().GetDataMorte();
     }
 }

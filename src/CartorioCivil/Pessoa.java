@@ -3,81 +3,95 @@ package CartorioCivil;
 import java.util.Date;
 
 public class Pessoa {
-    int cpf;
-    String nome, sexo, estadoCivil;
-    Pessoa pai, mae;
-    Date dataNascimento, dataMorte;
-
-    public Pessoa(int cpf, String nome, String sexo, Pessoa pai, Pessoa mae, Date dataNascimento) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.sexo = sexo;
-        this.pai = pai;
-        this.mae = mae;
-        this.dataNascimento = dataNascimento;
-        this.dataMorte = null;
-        this.estadoCivil = "Solteiro";
+    private final String mNome,mSexo;
+    private String mEstadoCivil;
+    private final Pessoa mPai, mMae;
+    private final int mCpf;
+    private final Date mDataNascimento;
+    private Date mDataMorte;
+    
+    public Pessoa(String nome, String sexo, Pessoa pai, Pessoa mae, int cpf, Date dataNascimento, Date dataMorte) {
+        this.mNome = nome;
+        this.mSexo = sexo;
+        this.mEstadoCivil = "Solteiro";
+        this.mPai = pai;
+        this.mMae = mae;
+        this.mCpf = cpf;
+        this.mDataNascimento = dataNascimento;
+        this.mDataMorte = dataMorte;
     }
 
-    public int getCpf() {
-        return cpf;
+    public String GetNome() {
+        return this.mNome;
     }
 
-    public String getNome() {
-        return nome;
+    public String GetSexo() {
+        return this.mSexo;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String GetEstadoCivil() {
+        return this.mEstadoCivil;
     }
 
-    public String getEstadoCivil() {
-        return estadoCivil;
+    public Pessoa GetPai() {
+        return this.mPai;
     }
 
-    public Pessoa getPai() {
-        return pai;
+    public Pessoa GetMae() {
+        return this.mMae;
     }
 
-    public Pessoa getMae() {
-        return mae;
+    public int GetCpf() {
+        return this.mCpf;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public Date GetDataNascimento() {
+        return this.mDataNascimento;
     }
 
-    public Date getDataMorte() {
-        return dataMorte;
+    public Date GetDataMorte() {
+        return this.mDataMorte;
     }
 
-    public void setEstadoCivil(String estadoCivil) {
-        this.estadoCivil = estadoCivil;
+    public void SetEstadoCivil(String estadoCivil) {
+        this.mEstadoCivil = estadoCivil;
     }
 
+    public void SetDataMorte(Date dataMorte) {
+        this.mDataMorte = dataMorte;
+    }
+    
+    public void Casar() {
+        if ("Casado".equals(this.GetEstadoCivil())) {
+            throw new IllegalArgumentException("Um dos conjuges já está casado.");
+        } else if(this.GetDataMorte() != null) {
+            throw new IllegalArgumentException("Um dos conjuges está morto.");
+        } else {
+            this.SetEstadoCivil("Casado");
+        }
+    }
+    
     @Override
     public String toString() {
-        String retorno = "";
-        
-        retorno = "## Pessoa ##";
-        retorno = retorno + "\nNome: " + this.getNome();
-        retorno = retorno + "\nCPF: " + this.getCpf();
-        retorno = retorno + "\nSexo: " + this.getSexo();
-        retorno = retorno + "\nEstado civil: " + this.getEstadoCivil();
-        retorno = retorno + "\nPai: ";
-        if (this.getPai() != null) {
-            retorno = retorno + (this.getPai().getNome());
+        String retorno = "## Pessoa ##";
+        retorno += "\nNome: " + this.GetNome();
+        retorno += "\nCPF: " + this.GetCpf();
+        retorno += "\nSexo: " + this.GetSexo();
+        retorno += "\nEstado civil: " + this.GetEstadoCivil();
+        retorno += "\nPai: ";
+        if (this.GetPai() != null) {
+            retorno += (this.GetPai().GetNome());
         } else {
-            retorno = retorno + "***";
+            retorno += "***";
         }
-        retorno = retorno + "\nMãe: ";
-        if (this.getMae() != null) {
-            retorno = retorno + (this.getMae().getNome());
+        retorno += "\nMãe: ";
+        if (this.GetMae() != null) {
+            retorno += (this.GetMae().GetNome());
         } else {
-            retorno = retorno + "***";
+            retorno += "***";
         }
-        retorno = retorno + "\nData nascimento: " + this.getDataNascimento();
-        retorno = retorno + "\n";
+        retorno += "\nData nascimento: " + this.GetDataNascimento();
+        retorno += "\n";
         
         return retorno;
     }

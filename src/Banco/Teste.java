@@ -5,9 +5,9 @@ import java.util.*;
 
 public class Teste {
     public static void main(String[] args) {
-        Pessoa p1 = new Pessoa(1, "Lucineia", "F", null, null, new Date());
-        Pessoa p2 = new Pessoa(2, "João", "M", null, null, new Date());
-        Pessoa p3 = new Pessoa(3, "Davi", "M", p2, p1, new Date());
+        Pessoa p1 = new Pessoa("Lucineia", "F", null, null, 1, new Date(), new Date());
+        Pessoa p2 = new Pessoa("João", "M", null, null, 2, new Date(), new Date());
+        Pessoa p3 = new Pessoa("Davi", "M", p2, p1, 3, new Date(), new Date());
         
         //System.out.println(p3);
         

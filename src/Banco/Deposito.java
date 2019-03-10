@@ -59,7 +59,7 @@ public class Deposito {
     @Override
     public String toString() {
         return  "# Depósito #" +
-                "\nNome do titular: " + this.GetContaDestino().GetTitular().getNome() +
+                "\nNome do titular: " + this.GetContaDestino().GetTitular().GetNome() +
                 "\nAgência: " + this.GetContaDestino().GetAgencia() +
                 "\nConta: " + this.GetContaDestino().GetConta() +
                 "\nSaldo anterior: " + this.GetSaldoAnterior() +

@@ -84,10 +84,12 @@ public class Transferencia {
         return "## Transferência ##" +
                 "\nAgência de origem: " + this.GetContaOrigem().GetAgencia() +
                 "\nConta de origem: " + this.GetContaOrigem().GetConta() +
+                "\nNome do titular: " + this.GetContaOrigem().GetTitular().GetNome() +
                 "\nSaldo anterior: " + this.GetSaldoAnteriorOrigem() +
                 "\nSaldo atual: " + this.GetSaldoAtualOrigem() +
                 "\nAgência de destino: " + this.GetContaDestino().GetAgencia() +
                 "\nConta de destino: " + this.GetContaDestino().GetConta() +
+                "\nNome do titular: " + this.GetContaDestino().GetTitular().GetNome() +
                 "\nSaldo anterior: " + this.GetSaldoAnteriorDestino() +
                 "\nSaldo atual: " + this.GetSaldoAtualDestino() +
                 "\nValor transferido: " + this.GetValor() +
