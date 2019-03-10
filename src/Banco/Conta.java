@@ -2,53 +2,52 @@ package Banco;
 
 import CartorioCivil.*;
 
-public class Conta{
-    Pessoa titular;
-    double saldo;
-    int agencia, conta;
-
+public class Conta {
+    private final Pessoa mTitular;
+    private double mSaldo;
+    private final int mAgencia, mConta;
+    
     public Conta(Pessoa titular, int agencia, int conta) {
-        this.titular = titular;
-        this.agencia = agencia;
-        this.conta = conta;
-        this.saldo = 0;
-    }
-
-    public Pessoa getTitular() {
-        return titular;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public int getAgencia() {
-        return agencia;
-    }
-
-    public int getConta() {
-        return conta;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+        this.mTitular = titular;
+        this.mAgencia = agencia;
+        this.mConta = conta;
+        this.mSaldo = 0;
     }
     
-    public void sacar(double valor) {
-        this.setSaldo(this.getSaldo() - valor);
+    public double GetSaldo() {
+        return this.mSaldo;
     }
     
-    public void depositar(double valor) {
-        this.setSaldo(this.getSaldo() + valor);
+    public Pessoa GetTitular() {
+        return mTitular;
+    }
+
+    public int GetAgencia() {
+        return mAgencia;
+    }
+
+    public int GetConta() {
+        return mConta;
     }
     
+    public void Depositar(double valor) {
+        this.mSaldo+=valor;
+    }
+    
+    public void Sacar(double valor) {
+        if (this.GetSaldo() < valor) {
+            throw new IllegalArgumentException("Saldo insuficiente.");
+        } else {
+            this.mSaldo-=valor;
+        }
+    }
+
     @Override
     public String toString() {
         return "## Conta ##" +
-                "\nTitular: " + this.getTitular().getNome() +
-                "\nAgência: " + this.getAgencia() +
-                "\nConta: " + this.getConta() +
-                "\nSaldo: " + this.getSaldo() +
-                "\n";
+                "\nTitular: " + this.GetTitular().getNome() +
+                "\nAgência: " + this.GetAgencia() +
+                "\nConta: " + this.GetConta() +
+                "\nSaldo: " + this.GetSaldo();
     }
 }

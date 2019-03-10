@@ -1,113 +1,69 @@
 package Banco;
 
-import CartorioCivil.Pessoa;
-import java.util.*;
+import java.util.Date;
 
-public class Saque implements OperacoesFinanceiras {
-    Conta contaOrigem;
-    double valor, saldoAnterior, saldoAtual;
-    Date dataOperacao;
-    boolean operacaoRealizada;
+public class Saque {
+    private final Conta mContaOrigem;
+    private final double mValor;
+    private double mSaldoAnterior, mSaldoAtual;
+    private Date mDataOperacao;
 
     public Saque(Conta contaOrigem, double valor) {
-        this.contaOrigem = contaOrigem;
-        this.valor = valor;
-        this.saldoAnterior = this.contaOrigem.getSaldo();
-        this.realizarOperacao(this.valor);
+        this.mContaOrigem = contaOrigem;
+        this.mValor = valor;
+        this.Operacao(valor);
     }
 
-    public Conta getContaOrigem() {
-        return contaOrigem;
+    public Conta GetContaOrigem() {
+        return this.mContaOrigem;
     }
 
-    public double getValor() {
-        return valor;
+    public double GetValor() {
+        return this.mValor;
     }
 
-    public double getSaldoAnterior() {
-        return saldoAnterior;
+    public double GetSaldoAnterior() {
+        return this.mSaldoAnterior;
     }
 
-    public double getSaldoAtual() {
-        return saldoAtual;
+    public double GetSaldoAtual() {
+        return this.mSaldoAtual;
     }
 
-    public Date getDataOperacao() {
-        return dataOperacao;
+    public Date GetDataOperacao() {
+        return this.mDataOperacao;
     }
 
-    public boolean isOperacaoRealizada() {
-        return operacaoRealizada;
+    public void SetSaldoAnterior(double saldoAnterior) {
+        this.mSaldoAnterior = saldoAnterior;
     }
 
-    public void setOperacaoRealizada(boolean operacaoRealizada) {
-        this.operacaoRealizada = operacaoRealizada;
+    public void SetSaldoAtual(double saldoAtual) {
+        this.mSaldoAtual = saldoAtual;
     }
     
-    public final boolean saqueValido() {
-        return this.getValor() <= this.getSaldoAnterior();
-    }
-    
-    @Override
-    public final void realizarOperacao(double valor) {
-        if (this.saqueValido()) {
-            this.getContaOrigem().sacar(valor);
-            this.setOperacaoRealizada(true);
-            System.out.println("Saque realizado com sucesso.");
-        } else {
-            this.setOperacaoRealizada(false);
-            System.out.println("Saque inválido. Saldo insuficiente.");
+    private void Operacao(double valor) {
+        try {
+            this.SetSaldoAnterior(this.GetContaOrigem().GetSaldo());
+            this.GetContaOrigem().Sacar(valor);
+            System.out.println("Saque realizado.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Saque não realizada.");
+        } finally {
+            this.SetSaldoAtual(this.GetContaOrigem().GetSaldo());
+            this.mDataOperacao = new Date();
         }
-        this.saldoAtual = this.getContaOrigem().getSaldo();
-        this.dataOperacao = new Date();
     }
     
     @Override
     public String toString() {
         return  "# Saque #" +
-                "\nNome do titular: " + this.getContaOrigem().getTitular().getNome() +
-                "\nAgência: " + this.getContaOrigem().getAgencia() +
-                "\nConta: " + this.getContaOrigem().getConta() +
-                "\nSaldo anterior: " + this.getSaldoAnterior() +
-                "\nValor sacado: " + this.getValor() +
-                "\nSaldo atual: " + this.getSaldoAtual() +
-                "\nOperação realizada: " + this.isOperacaoRealizada() +
-                "\n";
-    }
-    
-    @Override
-    public Conta retornaConta(Pessoa titular) {
-        if (this.getContaOrigem().getTitular() == titular) {
-            return this.getContaOrigem();
-        } else {
-            return null;
-        }
-    }
-    
-    @Override
-    public Pessoa retornaTitular(Conta conta) {
-        if (this.getContaOrigem() == conta) {
-            return this.getContaOrigem().getTitular();
-        } else {
-            return null;
-        }
-    }
-    
-    @Override
-    public Conta retornaConta(int cpf) {
-        if (this.getContaOrigem().getTitular().getCpf() == cpf) {
-            return this.getContaOrigem();
-        } else {
-            return null;
-        }
-    }
-    
-    @Override
-    public Pessoa retornaTitular(int cpf) {
-        if (this.getContaOrigem().getTitular().getCpf() == cpf) {
-            return this.getContaOrigem().getTitular();
-        } else {
-            return null;
-        }
+                "\nNome do titular: " + this.GetContaOrigem().GetTitular().getNome() +
+                "\nAgência: " + this.GetContaOrigem().GetAgencia() +
+                "\nConta: " + this.GetContaOrigem().GetConta() +
+                "\nSaldo anterior: " + this.GetSaldoAnterior() +
+                "\nValor depositado: " + this.GetValor() +
+                "\nSaldo atual: " + this.GetSaldoAtual();
     }
 }
