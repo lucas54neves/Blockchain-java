@@ -4,7 +4,7 @@ import Blockchain.*;
 import Banco.*;
 import CartorioCivil.*;
 import java.util.*;
-//import CartorioIomeis.*;
+import CartorioImoveis.*;
 
 public class Sistema {
     public void criaBancoDados(Chain chain) {
@@ -14,47 +14,47 @@ public class Sistema {
     public void criaBancoDadosCivil(Chain chain) {
         Block bloco;
         
-        Pessoa p1 = new Pessoa(1, "João", "M", null, null, new Date());
-        Pessoa p2 = new Pessoa(2, "Maria", "F", null, null, new Date());
+        Pessoa p1 = new Pessoa("João", "M", null, null, 1, new Date(), null);
+        Pessoa p2 = new Pessoa("Maria", "F", null, null, 2, new Date(), null);
         
         Casamento uniao1 = new Casamento(p1, p2, new Date());
         bloco = new Block (uniao1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Pessoa p3 = new Pessoa(3, "Fernando", "M", null, null, new Date());
-        Pessoa p4 = new Pessoa(4, "Marcela", "F", null, null, new Date());
+        Pessoa p3 = new Pessoa("Fernando", "M", null, null, 3, new Date(), null);
+        Pessoa p4 = new Pessoa("Marcela", "F", null, null, 4, new Date(), null);
         
         Casamento uniao2 = new Casamento(p3, p4, new Date());
         bloco = new Block (uniao2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Nascimento crianca1 = new Nascimento(p1, p2, new Date(), "Joana", "F", 5);
-        Pessoa f1 = crianca1.getIndividuo();
+        Nascimento crianca1 = new Nascimento("Joana", "F", p1, p2, 5, new Date());
+        Pessoa f1 = crianca1.GetIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Nascimento crianca2 = new Nascimento(p1, p2, new Date(), "Joaquina", "F", 6);
-        Pessoa f2 = crianca2.getIndividuo();
+        Nascimento crianca2 = new Nascimento("Joaquina", "F", p1, p2, 6, new Date());
+        Pessoa f2 = crianca2.GetIndividuo();
         bloco = new Block (crianca2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Nascimento crianca3 = new Nascimento(p3, p4, new Date(), "Joaquim", "M", 7);
-        Pessoa f3 = crianca3.getIndividuo();
+        Nascimento crianca3 = new Nascimento("Joaquim", "M", p3, p4, 7, new Date());
+        Pessoa f3 = crianca3.GetIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Nascimento crianca4 = new Nascimento(p3, p4, new Date(), "Joana", "F", 8);
-        Pessoa f4 = crianca4.getIndividuo();
+        Nascimento crianca4 = new Nascimento("Joana", "F", p3, p4, 8, new Date());
+        Pessoa f4 = crianca4.GetIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Nascimento crianca5 = new Nascimento(p1, p2, new Date(), "Joaquina", "F", 9);
-        Pessoa f5 = crianca5.getIndividuo();
+        Nascimento crianca5 = new Nascimento("Joaquina", "F", p1, p2, 9, new Date());
+        Pessoa f5 = crianca5.GetIndividuo();
         bloco = new Block (crianca2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
-        Nascimento crianca6 = new Nascimento(p3, p4, new Date(), "Joaquim", "M", 10);
-        Pessoa f6 = crianca6.getIndividuo();
+        Nascimento crianca6 = new Nascimento("Joaquim", "M", p3, p4, 10, new Date());
+        Pessoa f6 = crianca6.GetIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
@@ -185,116 +185,133 @@ public class Sistema {
     }
     
     public void MenuPrincipal(Chain chain,Scanner ler) {
-        System.out.println("Escolhe a opção desejada:");
-        System.out.println("[0] Sair");
-        System.out.println("[1] Banco");
-        System.out.println("[2] Cartório Civil");
-        System.out.println("[3] Cartório de Imóveis");
+        int opcao = -1;
         
-        int opcao = ler.nextInt();
+        do {
+            System.out.println("Escolhe a opção desejada:");
+            System.out.println("[0] Sair");
+            System.out.println("[1] Banco");
+            System.out.println("[2] Cartório Civil");
+            System.out.println("[3] Cartório de Imóveis");
+
+            opcao = ler.nextInt();
         
-        switch (opcao) {
-            case 1:
-                MenuBanco(chain, ler);
-                break;
-            case 2:
-                MenuCivil(chain, ler);
-                break;
-            case 3:
-                MenuImovel(chain, ler);
-                break;
-            default:
-                System.out.println("Opção não cadastrada. Escolha novamente.");
-                MenuPrincipal(chain, ler);
-                break;
-        }
+            switch (opcao) {
+                case 0:
+                    System.out.println("Sistema principal finalizado.");
+                    break;
+                case 1:
+                    MenuBanco(chain, ler);
+                    break;
+                case 2:
+                    MenuCivil(chain, ler);
+                    break;
+                case 3:
+                    MenuImovel(chain, ler);
+                    break;
+                default:
+                    System.out.println("Opção não cadastrada. Escolha novamente.");
+                    MenuPrincipal(chain, ler);
+                    break;
+            }
+        } while (opcao != 0);
     }
     
     public void MenuBanco(Chain chain,Scanner ler) {
-        System.out.println("Escolhe a opção desejada:");
-        System.out.println("[0] Sair");
-        System.out.println("[1] Criar conta");
-        System.out.println("[2] Consultar saldo");
-        System.out.println("[3] Depositar");
-        System.out.println("[4] Sacar");
-        System.out.println("[5] Transferir");
+        int opcao = -1;
         
-        int opcao = ler.nextInt();
-        
-        switch (opcao) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            default:
-                System.out.println("Opção não cadastrada. Escolha novamente.");
-                MenuBanco(chain, ler);
-                break;
-        } 
+        do {
+            System.out.println("Escolhe a opção desejada:");
+            System.out.println("[0] Sair");
+            System.out.println("[1] Criar conta");
+            System.out.println("[2] Consultar saldo");
+            System.out.println("[3] Depositar");
+            System.out.println("[4] Sacar");
+            System.out.println("[5] Transferir");
+
+            opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Opção não cadastrada. Escolha novamente.");
+                    MenuBanco(chain, ler);
+                    break;
+            }
+        } while (opcao != 0);
     }
     
     public void MenuCivil(Chain chain,Scanner ler) {
-        System.out.println("Escolhe a opção desejada:");
-        System.out.println("[0] Sair");
-        System.out.println("[1] Registrar um nascimento");
-        System.out.println("[2] Registrar um casamento");
-        System.out.println("[3] Registrar uma morte");
+        int opcao = -1;
         
-        int opcao = ler.nextInt();
-        
-        switch (opcao) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            default:
-                System.out.println("Opção não cadastrada. Escolha novamente.");
-                MenuCivil(chain, ler);
-                break;
-        }
+        do {
+            System.out.println("Escolhe a opção desejada:");
+            System.out.println("[0] Sair");
+            System.out.println("[1] Registrar um nascimento");
+            System.out.println("[2] Registrar um casamento");
+            System.out.println("[3] Registrar uma morte");
+
+            opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Opção não cadastrada. Escolha novamente.");
+                    MenuCivil(chain, ler);
+                    break;
+            }
+        } while (opcao != 0);
     }
     
     public void MenuImovel(Chain chain,Scanner ler) {
-        System.out.println("Escolhe a opção desejada:");
-        System.out.println("[0] Sair");
-        System.out.println("[1] Registrar um imóvel");
-        System.out.println("[2] Registrar uma venda");
+        int opcao = -1;
         
-        int opcao = ler.nextInt();
-        
-        switch (opcao) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            default:
-                System.out.println("Opção não cadastrada. Escolha novamente.");
-                MenuImovel(chain, ler);
-                break;
-        }
+        do {
+            System.out.println("Escolhe a opção desejada:");
+            System.out.println("[0] Sair");
+            System.out.println("[1] Registrar um imóvel");
+            System.out.println("[2] Registrar uma venda");
+
+            opcao = ler.nextInt();
+
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Opção não cadastrada. Escolha novamente.");
+                    MenuImovel(chain, ler);
+                    break;
+            }
+        } while (opcao != 0);
     }
     
     public static void main(String[] args) {
         Chain chain = new Chain();
         Sistema tb = new Sistema();
         Scanner ler = new Scanner(System.in);
-        
         tb.criaBancoDados(chain);
-        
         tb.MenuPrincipal(chain, ler);
     }
 }
