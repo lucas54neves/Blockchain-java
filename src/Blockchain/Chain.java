@@ -1,6 +1,8 @@
 package Blockchain;
 
 import Banco.*;
+import CartorioCivil.*;
+import CartorioImoveis.*;
 import java.util.*;
 
 public class Chain {
@@ -89,5 +91,62 @@ public class Chain {
         }
         
         return retorno;
+    }
+    
+    public Pessoa buscaRegistroPessoa(int cpf) {
+        try {
+            Pessoa retorno;
+            for (int i = this.tamanho()-1; i > 0; i--) {
+                Object registro = this.retornaBloco(i).getDado();
+
+                if (registro instanceof Nascimento) {
+                    retorno = ((Nascimento) registro).GetIndividuo();
+                    if (retorno.GetCpf() == cpf) {
+                        return retorno;
+                    }
+                }
+            }
+            throw new IllegalArgumentException("CPF não encontrado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    public Conta retornaConta(int agencia, int numConta) {
+        try {
+            for (int i = this.tamanho()-1; i > 0; i--) {
+                Object registro = this.retornaBloco(i).getDado();
+                Conta conta1, conta2;
+
+                if (registro instanceof Deposito) {
+                    conta1 = ((Deposito) registro).GetContaDestino();
+                    conta2 = null;
+                } else if (registro instanceof Saque) {
+                    conta1 = null;
+                    conta2 = ((Saque) registro).GetContaOrigem();
+                } else if (registro instanceof Transferencia) {
+                    conta1 = ((Transferencia) registro).GetContaDestino();
+                    conta2 = ((Transferencia) registro).GetContaOrigem();
+                } else {
+                    conta1 = null;
+                    conta2 = null;
+                }
+
+
+                if (conta1 != null && (conta1.GetAgencia() == agencia && conta1.GetConta()== numConta)) {
+                    return conta1;
+                } else {
+                    if (conta2 != null && (conta2.GetAgencia() == agencia && conta2.GetConta()== numConta)) {
+                        return conta2;
+                    }
+                }
+            }
+            
+            throw new IllegalArgumentException("Conta não encontrada.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

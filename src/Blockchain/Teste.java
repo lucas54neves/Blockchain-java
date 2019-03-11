@@ -5,10 +5,13 @@ import java.util.Date;
 
 public class Teste {
     public static void main(String[] args) {
-        Pessoa p1 = new Pessoa("lucas", "M", null, null, 123, new Date(), new Date());
-        Block block = new Block(p1, "abs", 1);
+        Nascimento registro = new Nascimento("lucas", "M", null, null, 123, new Date());
+        
         Chain corrente = new Chain();
-        corrente.adicionaBloco(block);
+        
+        Block bloco = new Block (registro, corrente.ultimoBloco().getHash(), corrente.tamanho());
+        corrente.adicionaBloco(bloco);
+        
         System.out.println(corrente);
     }
 }

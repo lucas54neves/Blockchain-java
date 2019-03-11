@@ -4,7 +4,7 @@ import Blockchain.*;
 import Banco.*;
 import CartorioCivil.*;
 import java.util.*;
-import CartorioImoveis.*;
+//import CartorioImoveis.*;
 
 public class Sistema {
     public void criaBancoDados(Chain chain) {
@@ -103,8 +103,6 @@ public class Sistema {
         Conta conta9 = new Conta(p9, 1, 135);
         Conta conta10 = new Conta(p10, 4, 140);
         
-        Date data1 = new Date();
-        
         Deposito dep1 = new Deposito(conta1, 1000);
         bloco = new Block (dep1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
@@ -184,10 +182,6 @@ public class Sistema {
         Transferencia tra10 = new Transferencia(conta1, conta10, 100);
         bloco = new Block (tra10, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
-        
-        Date data2 = new Date();
-        
-        System.out.println(chain.extratoBancario(conta10, data1, data2));
     }
     
     public void MenuPrincipal(Chain chain,Scanner ler) {
@@ -225,6 +219,11 @@ public class Sistema {
     
     public void MenuBanco(Chain chain,Scanner ler) {
         int opcao = -1;
+        Block bloco;
+        Pessoa titular;
+        int cpf, agencia, numConta, mes, ano;
+        Conta conta;
+        Date dataInicial, dataFinal;
         
         while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
@@ -242,11 +241,54 @@ public class Sistema {
                     System.out.println("Menu do banco finalizado.");
                     break;
                 case 1:
-                    System.out.println("Entre com o CPF do titular.");
-                    int cpf = ler.nextInt();
-                    
+                    try {
+                        System.out.println("Entre com o CPF do titular.");
+                        cpf = ler.nextInt();
+                        titular = chain.buscaRegistroPessoa(cpf);
+                        
+                        if (titular == null) {
+                            throw new IllegalArgumentException("Não foi possível encontrar o titular.");
+                        }
+
+                        System.out.println("Entre com a agência.");
+                        agencia = ler.nextInt();
+                        System.out.println("Entre com o número da conta.");
+                        numConta = ler.nextInt();
+                        conta = new Conta(titular, agencia, numConta);
+
+                        System.out.println("Entre com o valor do depósito.");
+                        int valor = ler.nextInt();
+                        Deposito primeiroDeposito = new Deposito(conta, valor);
+
+                        bloco = new Block(primeiroDeposito, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
+                    try {
+                        System.out.println("Entre com a agência.");
+                        agencia = ler.nextInt();
+                        System.out.println("Entre com o número da conta.");
+                        numConta = ler.nextInt();
+                        conta = chain.retornaConta(agencia, numConta);
+
+                        if (conta == null) {
+                            throw new IllegalArgumentException("Não foi possível encontrar a conta.");
+                        }
+                        
+                        System.out.println("Entre com o mês que deseja consultar.");
+                        mes = ler.nextInt();
+                        System.out.println("Entre com o ano que deseja consultar.");
+                        ano = ler.nextInt();
+                        dataInicial = new Date(ano, mes-1, 1);
+                        dataFinal = new Date(ano, mes, 1);
+
+                        System.out.println(chain.extratoBancario(conta, dataInicial, dataFinal));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     break;
@@ -322,6 +364,7 @@ public class Sistema {
         Sistema tb = new Sistema();
         Scanner ler = new Scanner(System.in);
         tb.criaBancoDados(chain);
-        //tb.MenuPrincipal(chain, ler);
+        System.out.println(chain);
+        tb.MenuPrincipal(chain, ler);
     }
 }

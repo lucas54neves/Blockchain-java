@@ -55,6 +55,6 @@ public class Block {
         + "\nHash atual: " + this.getHash()
         + "\nDados do Bloco:"
         + "\n" + this.getDado().toString()
-        + "========================\n\n";
+        + "\n========================\n\n";
     }
 }
