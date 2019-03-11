@@ -4,42 +4,42 @@ import java.util.Date;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class Block {
-    final Object dado;
-    final long tempo;
-    final String hash;
-    private String hashAnterior;
-    final long indice;
+    private final Object mDado;
+    private final long mTempo;
+    private final String mHash;
+    private String mHashAnterior;
+    private final long mIndice;
 
     public Block(Object dado, String hashAnterior, long indice) {
-        this.dado = dado;
-        this.hashAnterior = hashAnterior;
-        this.tempo = new Date().getTime();
-        this.indice = indice;
-        this.hash = this.calculaHash();
+        this.mDado = dado;
+        this.mHashAnterior = hashAnterior;
+        this.mTempo = new Date().getTime();
+        this.mIndice = indice;
+        this.mHash = this.calculaHash();
     }
 
     public Object getDado() {
-        return dado;
+        return this.mDado;
     }
 
     public long getTempo() {
-        return tempo;
+        return this.mTempo;
     }
 
     public String getHash() {
-        return hash;
+        return this.mHash;
     }
 
     public String getHashAnterior() {
-        return hashAnterior;
+        return this.mHashAnterior;
     }
 
     public long getIndice() {
-        return indice;
+        return this.mIndice;
     }
 
     public void setHashAnterior(String hashAnterior) {
-        this.hashAnterior = hashAnterior;
+        this.mHashAnterior = hashAnterior;
     }
     
     public final String calculaHash() {

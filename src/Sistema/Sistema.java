@@ -103,6 +103,8 @@ public class Sistema {
         Conta conta9 = new Conta(p9, 1, 135);
         Conta conta10 = new Conta(p10, 4, 140);
         
+        Date data1 = new Date();
+        
         Deposito dep1 = new Deposito(conta1, 1000);
         bloco = new Block (dep1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
@@ -182,12 +184,16 @@ public class Sistema {
         Transferencia tra10 = new Transferencia(conta1, conta10, 100);
         bloco = new Block (tra10, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
+        
+        Date data2 = new Date();
+        
+        System.out.println(chain.extratoBancario(conta10, data1, data2));
     }
     
     public void MenuPrincipal(Chain chain,Scanner ler) {
         int opcao = -1;
         
-        do {
+        while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
             System.out.println("[0] Sair");
             System.out.println("[1] Banco");
@@ -214,13 +220,13 @@ public class Sistema {
                     MenuPrincipal(chain, ler);
                     break;
             }
-        } while (opcao != 0);
+        }
     }
     
     public void MenuBanco(Chain chain,Scanner ler) {
         int opcao = -1;
         
-        do {
+        while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
             System.out.println("[0] Sair");
             System.out.println("[1] Criar conta");
@@ -233,8 +239,12 @@ public class Sistema {
 
             switch (opcao) {
                 case 0:
+                    System.out.println("Menu do banco finalizado.");
                     break;
                 case 1:
+                    System.out.println("Entre com o CPF do titular.");
+                    int cpf = ler.nextInt();
+                    
                     break;
                 case 2:
                     break;
@@ -249,13 +259,13 @@ public class Sistema {
                     MenuBanco(chain, ler);
                     break;
             }
-        } while (opcao != 0);
+        }
     }
     
     public void MenuCivil(Chain chain,Scanner ler) {
         int opcao = -1;
         
-        do {
+        while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
             System.out.println("[0] Sair");
             System.out.println("[1] Registrar um nascimento");
@@ -278,13 +288,13 @@ public class Sistema {
                     MenuCivil(chain, ler);
                     break;
             }
-        } while (opcao != 0);
+        }
     }
     
     public void MenuImovel(Chain chain,Scanner ler) {
         int opcao = -1;
         
-        do {
+        while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
             System.out.println("[0] Sair");
             System.out.println("[1] Registrar um imóvel");
@@ -304,7 +314,7 @@ public class Sistema {
                     MenuImovel(chain, ler);
                     break;
             }
-        } while (opcao != 0);
+        }
     }
     
     public static void main(String[] args) {
@@ -312,6 +322,6 @@ public class Sistema {
         Sistema tb = new Sistema();
         Scanner ler = new Scanner(System.in);
         tb.criaBancoDados(chain);
-        tb.MenuPrincipal(chain, ler);
+        //tb.MenuPrincipal(chain, ler);
     }
 }
