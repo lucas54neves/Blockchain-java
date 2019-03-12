@@ -218,10 +218,9 @@ public class Sistema {
     }
     
     public void MenuBanco(Chain chain,Scanner ler) {
-        int opcao = -1;
+        int opcao = -1, cpf, agencia, numConta, mes, ano;
         Block bloco;
         Pessoa titular;
-        int cpf, agencia, numConta, mes, ano;
         double valor;
         Conta conta1, conta2;
         Date dataInicial, dataFinal;
@@ -283,8 +282,8 @@ public class Sistema {
                         mes = ler.nextInt();
                         System.out.println("Entre com o ano que deseja consultar.");
                         ano = ler.nextInt();
-                        dataInicial = new Date(ano, mes-1, 1);
-                        dataFinal = new Date(ano, mes, 1);
+                        dataInicial = new Date(ano+1900, mes-1, 1);
+                        dataFinal = new Date(ano+1900, mes, 1);
 
                         System.out.println(chain.extratoBancario(conta1, dataInicial, dataFinal));
                     } catch (IllegalArgumentException e) {
@@ -379,7 +378,9 @@ public class Sistema {
     }
     
     public void MenuCivil(Chain chain,Scanner ler) {
-        int opcao = -1;
+        int opcao = -1, dia, mes, ano;
+        Date data;
+        Block bloco;
         
         while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
@@ -392,12 +393,111 @@ public class Sistema {
 
             switch (opcao) {
                 case 0:
+                    System.out.println("Menu do cartório civil finalizado.");
                     break;
                 case 1:
+                    try {
+                        int cpfPai, cpfMae;
+                        Pessoa pai, mae;
+                        String nome, sexo;
+
+                        System.out.println("Entre com o CPF do pai.");
+                        cpfPai = ler.nextInt();
+                        System.out.println("Entre com o CPF da mãe.");
+                        cpfMae = ler.nextInt();
+                        
+                        pai = chain.buscaRegistroPessoa(cpfPai);
+                        if (pai == null) {
+                            throw new IllegalArgumentException("Registro do nascimento não é possível.");
+                        }
+                        mae = chain.buscaRegistroPessoa(cpfMae);
+                        if (pai == null) {
+                            throw new IllegalArgumentException("Registro do nascimento não é possível.");
+                        }
+                        
+                        System.out.println("Entre com o nome da criança.");
+                        nome = ler.next();
+                        System.out.println("Entre com o sexo da criança.");
+                        sexo = ler.next();
+                        System.out.println("Entre com o dia que a criança nasceu.");
+                        dia = ler.nextInt();
+                        System.out.println("Entre com o mês que a criança nasceu.");
+                        mes = ler.nextInt();
+                        System.out.println("Entre com o ano que a criança nasceu.");
+                        ano = ler.nextInt();
+                        
+                        data = new Date(ano+1900, mes-1, dia);
+                        
+                        Nascimento registro = new Nascimento(nome, sexo, pai, mae, cpfMae, data);
+                        bloco = new Block(registro, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
+                    try {
+                        Pessoa conjuge1, conjuge2;
+                        int cpfConjuge1, cpfConjuge2;
+                        
+                        System.out.println("Entre com o CPF de um cônjuge.");
+                        cpfConjuge1 = ler.nextInt();
+                        System.out.println("Entre com o CPF do outro cônjuge.");
+                        cpfConjuge2 = ler.nextInt();
+                        
+                        conjuge1 = chain.buscaRegistroPessoa(cpfConjuge1);
+                        if (conjuge1 == null) {
+                            throw new IllegalArgumentException("Registro do casamento não é possível.");
+                        }
+                        conjuge2 = chain.buscaRegistroPessoa(cpfConjuge2);
+                        if (conjuge2 == null) {
+                            throw new IllegalArgumentException("Registro do casamento não é possível.");
+                        }
+                        
+                        System.out.println("Entre com o dia do casamento.");
+                        dia = ler.nextInt();
+                        System.out.println("Entre com o mês do casamento.");
+                        mes = ler.nextInt();
+                        System.out.println("Entre com o ano do casamento.");
+                        ano = ler.nextInt();
+                        
+                        data = new Date(ano+1900, mes-1, dia);
+                        
+                        Casamento registro = new Casamento(conjuge1, conjuge2, data);
+                        bloco = new Block(registro, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
+                    try {
+                        int cpfFalecido;
+                        Pessoa falecido;
+
+                        System.out.println("Entre com o CPF do felecido.");
+                        cpfFalecido = ler.nextInt();
+                        
+                        falecido = chain.buscaRegistroPessoa(cpfFalecido);
+                        if (falecido == null) {
+                            throw new IllegalArgumentException("Registro da morte não é possível.");
+                        }
+                        
+                        System.out.println("Entre com o dia da morte.");
+                        dia = ler.nextInt();
+                        System.out.println("Entre com o mês da morte.");
+                        mes = ler.nextInt();
+                        System.out.println("Entre com o ano da morte.");
+                        ano = ler.nextInt();
+                        
+                        data = new Date(ano+1900, mes-1, dia);
+                        
+                        Morte registro = new Morte(falecido, data);
+                        bloco = new Block(registro, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("Opção não cadastrada. Escolha novamente.");
