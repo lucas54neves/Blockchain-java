@@ -4,7 +4,7 @@ import Blockchain.*;
 import Banco.*;
 import CartorioCivil.*;
 import java.util.*;
-//import CartorioImoveis.*;
+import CartorioImoveis.*;
 
 public class Sistema {
     public void criaBancoDados(Chain chain) {
@@ -193,6 +193,7 @@ public class Sistema {
             System.out.println("[1] Banco");
             System.out.println("[2] Cartório Civil");
             System.out.println("[3] Cartório de Imóveis");
+            System.out.println("[4] Imprimir a blockchain");
 
             opcao = ler.nextInt();
         
@@ -208,6 +209,9 @@ public class Sistema {
                     break;
                 case 3:
                     MenuImovel(chain, ler);
+                    break;
+                case 4:
+                    System.out.println(chain);
                     break;
                 default:
                     System.out.println("Opção não cadastrada. Escolha novamente.");
@@ -509,6 +513,7 @@ public class Sistema {
     
     public void MenuImovel(Chain chain,Scanner ler) {
         int opcao = -1;
+        Block bloco;
         
         while (opcao != 0) {
             System.out.println("Escolhe a opção desejada:");
@@ -520,10 +525,75 @@ public class Sistema {
 
             switch (opcao) {
                 case 0:
+                    System.out.println("Menu do cartório de imóveis finalizado.");
                     break;
                 case 1:
+                    try {
+                        int cpfDono, idImovel;
+                        Pessoa dono;
+                        Imovel registro;
+                        String endereco;
+                        double valor;
+                        
+                        System.out.println("Entre com o CPF do dono do imóvel.");
+                        cpfDono = ler.nextInt();
+                        dono = chain.buscaRegistroPessoa(cpfDono);
+                        
+                        if (dono == null) {
+                            throw new IllegalArgumentException("Não foi possível registrar o imóvel.");
+                        }
+                        
+                        System.out.println("Entre com o endereço do imóvel.");
+                        endereco = ler.next();
+                        System.out.println("Entre com o valor do imóvel.");
+                        valor = ler.nextDouble();
+                        System.out.println("Entre com o código do imóvel.");
+                        idImovel = ler.nextInt();
+                        
+                        registro = new Imovel(dono, idImovel, endereco, valor);
+                        bloco = new Block(registro, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
+                    try {
+                        int cpfVendedor, cpfComprador, idImovel;
+                        Pessoa vendedor, comprador;
+                        Imovel imovel;
+                        CompraVenda registro;
+                        double oferta;
+                        
+                        System.out.println("Entre com o CPF do vendedor.");
+                        cpfVendedor = ler.nextInt();
+                        vendedor = chain.buscaRegistroPessoa(cpfVendedor);
+                        
+                        if (vendedor == null) {
+                            throw new IllegalArgumentException("Não foi possível registrar a venda do imóvel.");
+                        }
+                        
+                        System.out.println("Entre com o CPF do comprador.");
+                        cpfComprador = ler.nextInt();
+                        comprador = chain.buscaRegistroPessoa(cpfComprador);
+                        
+                        if (comprador == null) {
+                            throw new IllegalArgumentException("Não foi possível registrar a venda do imóvel.");
+                        }
+                        
+                        System.out.println("Entre com o ID do imóvel.");
+                        idImovel = ler.nextInt();
+                        imovel = chain.buscaRegistroImovel(idImovel);
+                        
+                        System.out.println("Entre com a oferta da compra.");
+                        oferta = ler.nextDouble();
+                        
+                        registro = new CompraVenda(imovel, comprador, vendedor, oferta);
+                        bloco = new Block(registro, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("Opção não cadastrada. Escolha novamente.");

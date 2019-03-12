@@ -149,4 +149,35 @@ public class Chain {
             return null;
         }
     }
+    
+    public Imovel buscaRegistroImovel(int id) {
+        try {
+            Imovel retorno = null;
+                
+            for (int i = this.tamanho()-1; i > 0; i--) {
+                Object registro = this.retornaBloco(i).getDado();
+                
+                int codigo;
+                if (registro instanceof Imovel) {
+                    codigo = ((Imovel) registro).getCodigo();
+                    if (codigo == id) {
+                        retorno = ((Imovel) registro);
+                        return retorno;
+                    }
+                }
+                
+                if (registro instanceof CompraVenda) {
+                    codigo = ((CompraVenda) registro).getImovel().getCodigo();
+                    if (codigo == id) {
+                        return ((CompraVenda) registro).getImovel();
+                    }
+                }
+            }
+            
+            throw new IllegalArgumentException("Imovel não encontrado.");
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
+            return null;
+        }
+    }
 }
