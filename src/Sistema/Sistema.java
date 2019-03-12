@@ -222,7 +222,8 @@ public class Sistema {
         Block bloco;
         Pessoa titular;
         int cpf, agencia, numConta, mes, ano;
-        Conta conta;
+        double valor;
+        Conta conta1, conta2;
         Date dataInicial, dataFinal;
         
         while (opcao != 0) {
@@ -247,18 +248,18 @@ public class Sistema {
                         titular = chain.buscaRegistroPessoa(cpf);
                         
                         if (titular == null) {
-                            throw new IllegalArgumentException("Não foi possível encontrar o titular.");
+                            throw new IllegalArgumentException("Não foi possível criar a conta.");
                         }
 
                         System.out.println("Entre com a agência.");
                         agencia = ler.nextInt();
                         System.out.println("Entre com o número da conta.");
                         numConta = ler.nextInt();
-                        conta = new Conta(titular, agencia, numConta);
+                        conta1 = new Conta(titular, agencia, numConta);
 
                         System.out.println("Entre com o valor do depósito.");
-                        int valor = ler.nextInt();
-                        Deposito primeiroDeposito = new Deposito(conta, valor);
+                        valor = ler.nextInt();
+                        Deposito primeiroDeposito = new Deposito(conta1, valor);
 
                         bloco = new Block(primeiroDeposito, chain.ultimoBloco().getHash(), chain.tamanho()+1);
                         chain.adicionaBloco(bloco);
@@ -272,10 +273,10 @@ public class Sistema {
                         agencia = ler.nextInt();
                         System.out.println("Entre com o número da conta.");
                         numConta = ler.nextInt();
-                        conta = chain.retornaConta(agencia, numConta);
+                        conta1 = chain.retornaConta(agencia, numConta);
 
-                        if (conta == null) {
-                            throw new IllegalArgumentException("Não foi possível encontrar a conta.");
+                        if (conta1 == null) {
+                            throw new IllegalArgumentException("Não foi possível consultar o extrato.");
                         }
                         
                         System.out.println("Entre com o mês que deseja consultar.");
@@ -285,16 +286,89 @@ public class Sistema {
                         dataInicial = new Date(ano, mes-1, 1);
                         dataFinal = new Date(ano, mes, 1);
 
-                        System.out.println(chain.extratoBancario(conta, dataInicial, dataFinal));
+                        System.out.println(chain.extratoBancario(conta1, dataInicial, dataFinal));
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case 3:
+                    try {
+                        System.out.println("Entre com a agência da conta que deseja depositar.");
+                        agencia = ler.nextInt();
+                        System.out.println("Entre com o número da conta que deseja depositar.");
+                        numConta = ler.nextInt();
+                        conta1 = chain.retornaConta(agencia, numConta);
+
+                        if (conta1 == null) {
+                            throw new IllegalArgumentException("Não foi possível realizar o depósito.");
+                        }
+                        
+                        System.out.println("Entre com o valor a ser depositado.");
+                        valor = ler.nextInt();
+                        
+                        Deposito deposito = new Deposito(conta1, valor);
+
+                        bloco = new Block(deposito, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 4:
+                    try {
+                        System.out.println("Entre com a agência da conta que deseja sacar.");
+                        agencia = ler.nextInt();
+                        System.out.println("Entre com o número da conta que deseja sacar.");
+                        numConta = ler.nextInt();
+                        conta1 = chain.retornaConta(agencia, numConta);
+
+                        if (conta1 == null) {
+                            throw new IllegalArgumentException("Não foi possível realizar o saque.");
+                        }
+                        
+                        System.out.println("Entre com o valor a ser sacado.");
+                        valor = ler.nextInt();
+                        
+                        Saque saque = new Saque(conta1, valor);
+
+                        bloco = new Block(saque, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 5:
+                    try {
+                        System.out.println("Entre com a agência da sua conta que deseja sacar.");
+                        agencia = ler.nextInt();
+                        System.out.println("Entre com o número da conta que deseja sacar.");
+                        numConta = ler.nextInt();
+                        conta1 = chain.retornaConta(agencia, numConta);
+
+                        if (conta1 == null) {
+                            throw new IllegalArgumentException("Não foi possível realizar a tranferência.");
+                        }
+                        
+                        System.out.println("Entre com a agência da conta que deseja depositar.");
+                        agencia = ler.nextInt();
+                        System.out.println("Entre com o número da conta que deseja depositar.");
+                        numConta = ler.nextInt();
+                        conta2 = chain.retornaConta(agencia, numConta);
+
+                        if (conta2 == null) {
+                            throw new IllegalArgumentException("Não foi possível realizar a tranferência.");
+                        }
+                        
+                        System.out.println("Entre com o valor a ser transferido.");
+                        valor = ler.nextInt();
+                        
+                        Transferencia transferencia = new Transferencia(conta1, conta2, valor);
+
+                        bloco = new Block(transferencia, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+                        chain.adicionaBloco(bloco);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("Opção não cadastrada. Escolha novamente.");
