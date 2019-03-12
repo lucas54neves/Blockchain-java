@@ -22,7 +22,7 @@ public class Chain {
     
     public boolean chainValida() {
         for (int i = 1; i < this.tamanho(); ++i) {
-            if ((this.retornaBloco(i-1).getHash() != this.retornaBloco(i).getHashAnterior())
+            if ((!this.retornaBloco(i-1).getHash().equals(this.retornaBloco(i).getHashAnterior()))
             || (this.retornaBloco(i-1).getTempo() > this.retornaBloco(i).getTempo())
             || (this.retornaBloco(i-1).getIndice() > this.retornaBloco(i).getIndice())) {
                 return false;
@@ -64,17 +64,17 @@ public class Chain {
             Conta conta1, conta2;
             
             if (transacao instanceof Deposito) {
-                data = ((Deposito) transacao).GetDataOperacao();
-                conta1 = ((Deposito) transacao).GetContaDestino();
+                data = ((Deposito) transacao).getDataOperacao();
+                conta1 = ((Deposito) transacao).getContaDestino();
                 conta2 = null;
             } else if (transacao instanceof Saque) {
-                data = ((Saque) transacao).GetDataOperacao();
+                data = ((Saque) transacao).getDataOperacao();
                 conta1 = null;
-                conta2 = ((Saque) transacao).GetContaOrigem();
+                conta2 = ((Saque) transacao).getContaOrigem();
             } else if (transacao instanceof Transferencia) {
-                data = ((Transferencia) transacao).GetDataOperacao();
-                conta1 = ((Transferencia) transacao).GetContaDestino();
-                conta2 = ((Transferencia) transacao).GetContaOrigem();
+                data = ((Transferencia) transacao).getDataOperacao();
+                conta1 = ((Transferencia) transacao).getContaDestino();
+                conta2 = ((Transferencia) transacao).getContaOrigem();
             } else {
                 data = null;
                 conta1 = null;
@@ -82,8 +82,8 @@ public class Chain {
             }
             
             
-            if ((conta1 != null && (conta1.GetAgencia() == contaBuscada.GetAgencia() && conta1.GetConta()== contaBuscada.GetConta())) ||
-                (conta2 != null && (conta2.GetAgencia() == contaBuscada.GetAgencia() && conta2.GetConta()== contaBuscada.GetConta()))) {
+            if ((conta1 != null && (conta1.getAgencia() == contaBuscada.getAgencia() && conta1.getConta()== contaBuscada.getConta())) ||
+                (conta2 != null && (conta2.getAgencia() == contaBuscada.getAgencia() && conta2.getConta()== contaBuscada.getConta()))) {
                 if (data != null && data.after(dataInicial) && data.before(dataFinal)) {
                     retorno += this.retornaBloco(i).getDado().toString() + "\n";
                 }
@@ -100,8 +100,8 @@ public class Chain {
                 Object registro = this.retornaBloco(i).getDado();
 
                 if (registro instanceof Nascimento) {
-                    retorno = ((Nascimento) registro).GetIndividuo();
-                    if (retorno.GetCpf() == cpf) {
+                    retorno = ((Nascimento) registro).getIndividuo();
+                    if (retorno.getCpf() == cpf) {
                         return retorno;
                     }
                 }
@@ -120,24 +120,24 @@ public class Chain {
                 Conta conta1, conta2;
 
                 if (registro instanceof Deposito) {
-                    conta1 = ((Deposito) registro).GetContaDestino();
+                    conta1 = ((Deposito) registro).getContaDestino();
                     conta2 = null;
                 } else if (registro instanceof Saque) {
                     conta1 = null;
-                    conta2 = ((Saque) registro).GetContaOrigem();
+                    conta2 = ((Saque) registro).getContaOrigem();
                 } else if (registro instanceof Transferencia) {
-                    conta1 = ((Transferencia) registro).GetContaDestino();
-                    conta2 = ((Transferencia) registro).GetContaOrigem();
+                    conta1 = ((Transferencia) registro).getContaDestino();
+                    conta2 = ((Transferencia) registro).getContaOrigem();
                 } else {
                     conta1 = null;
                     conta2 = null;
                 }
 
 
-                if (conta1 != null && (conta1.GetAgencia() == agencia && conta1.GetConta()== numConta)) {
+                if (conta1 != null && (conta1.getAgencia() == agencia && conta1.getConta()== numConta)) {
                     return conta1;
                 } else {
-                    if (conta2 != null && (conta2.GetAgencia() == agencia && conta2.GetConta()== numConta)) {
+                    if (conta2 != null && (conta2.getAgencia() == agencia && conta2.getConta()== numConta)) {
                         return conta2;
                     }
                 }

@@ -21,76 +21,76 @@ public class Pessoa {
         this.mDataMorte = dataMorte;
     }
 
-    public String GetNome() {
+    public String getNome() {
         return this.mNome;
     }
 
-    public String GetSexo() {
+    public String getSexo() {
         return this.mSexo;
     }
 
-    public String GetEstadoCivil() {
+    public String getEstadoCivil() {
         return this.mEstadoCivil;
     }
 
-    public Pessoa GetPai() {
+    public Pessoa getPai() {
         return this.mPai;
     }
 
-    public Pessoa GetMae() {
+    public Pessoa getMae() {
         return this.mMae;
     }
 
-    public int GetCpf() {
+    public int getCpf() {
         return this.mCpf;
     }
 
-    public Date GetDataNascimento() {
+    public Date getDataNascimento() {
         return this.mDataNascimento;
     }
 
-    public Date GetDataMorte() {
+    public Date getDataMorte() {
         return this.mDataMorte;
     }
 
-    public void SetEstadoCivil(String estadoCivil) {
+    public void setEstadoCivil(String estadoCivil) {
         this.mEstadoCivil = estadoCivil;
     }
 
-    public void SetDataMorte(Date dataMorte) {
+    public void setDataMorte(Date dataMorte) {
         this.mDataMorte = dataMorte;
     }
     
-    public void Casar() {
-        if ("Casado".equals(this.GetEstadoCivil())) {
+    public void casar() {
+        if ("Casado".equals(this.getEstadoCivil())) {
             throw new IllegalArgumentException("Um dos conjuges já está casado.");
-        } else if(this.GetDataMorte() != null) {
+        } else if(this.getDataMorte() != null) {
             throw new IllegalArgumentException("Um dos conjuges está morto.");
         } else {
-            this.SetEstadoCivil("Casado");
+            this.setEstadoCivil("Casado");
         }
     }
     
     @Override
     public String toString() {
         String retorno = "## Pessoa ##";
-        retorno += "\nNome: " + this.GetNome();
-        retorno += "\nCPF: " + this.GetCpf();
-        retorno += "\nSexo: " + this.GetSexo();
-        retorno += "\nEstado civil: " + this.GetEstadoCivil();
+        retorno += "\nNome: " + this.getNome();
+        retorno += "\nCPF: " + this.getCpf();
+        retorno += "\nSexo: " + this.getSexo();
+        retorno += "\nEstado civil: " + this.getEstadoCivil();
         retorno += "\nPai: ";
-        if (this.GetPai() != null) {
-            retorno += (this.GetPai().GetNome());
+        if (this.getPai() != null) {
+            retorno += (this.getPai().getNome());
         } else {
             retorno += "***";
         }
         retorno += "\nMãe: ";
-        if (this.GetMae() != null) {
-            retorno += (this.GetMae().GetNome());
+        if (this.getMae() != null) {
+            retorno += (this.getMae().getNome());
         } else {
             retorno += "***";
         }
-        retorno += "\nData nascimento: " + this.GetDataNascimento();
+        retorno += "\nData nascimento: " + this.getDataNascimento();
         retorno += "\n";
         
         return retorno;

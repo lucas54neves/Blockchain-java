@@ -12,69 +12,69 @@ public class Transferencia {
         this.mContaOrigem = contaOrigem;
         this.mContaDestino = contaDestino;
         this.mValor = valor;
-        this.Operacao(valor);
+        this.operacao(valor);
     }
 
-    public Conta GetContaOrigem() {
+    public Conta getContaOrigem() {
         return this.mContaOrigem;
     }
 
-    public Conta GetContaDestino() {
+    public Conta getContaDestino() {
         return this.mContaDestino;
     }
 
-    public double GetValor() {
+    public double getValor() {
         return this.mValor;
     }
 
-    public double GetSaldoAnteriorOrigem() {
+    public double getSaldoAnteriorOrigem() {
         return this.mSaldoAnteriorOrigem;
     }
 
-    public double GetSaldoAtualOrigem() {
+    public double getSaldoAtualOrigem() {
         return this.mSaldoAtualOrigem;
     }
 
-    public double GetSaldoAnteriorDestino() {
+    public double getSaldoAnteriorDestino() {
         return this.mSaldoAnteriorDestino;
     }
 
-    public double GetSaldoAtualDestino() {
+    public double getSaldoAtualDestino() {
         return this.mSaldoAtualDestino;
     }
 
-    public Date GetDataOperacao() {
+    public Date getDataOperacao() {
         return this.mDataOperacao;
     }
 
-    public void SetSaldoAnteriorOrigem(double valor) {
+    public void setSaldoAnteriorOrigem(double valor) {
         this.mSaldoAnteriorOrigem = valor;
     }
 
-    public void SetSaldoAtualOrigem(double valor) {
+    public void setSaldoAtualOrigem(double valor) {
         this.mSaldoAtualOrigem = valor;
     }
     
-    public void SetSaldoAnteriorDestino(double valor) {
+    public void setSaldoAnteriorDestino(double valor) {
         this.mSaldoAnteriorDestino = valor;
     }
 
-    public void SetSaldoAtualDestino(double valor) {
+    public void setSaldoAtualDestino(double valor) {
         this.mSaldoAtualDestino = valor;
     }
     
-    private void Operacao(double valor) {
+    private void operacao(double valor) {
         try {
-            this.SetSaldoAnteriorOrigem(this.GetContaOrigem().GetSaldo());
-            this.SetSaldoAnteriorDestino(this.GetContaDestino().GetSaldo());
-            this.GetContaOrigem().Sacar(valor);
+            this.setSaldoAnteriorOrigem(this.getContaOrigem().getSaldo());
+            this.setSaldoAnteriorDestino(this.getContaDestino().getSaldo());
+            this.getContaOrigem().sacar(valor);
             System.out.println("Transferência realizada.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Transferência não realizada.");
         } finally {
-            this.SetSaldoAtualOrigem(this.GetSaldoAnteriorOrigem());
-            this.SetSaldoAtualDestino(this.GetSaldoAnteriorDestino());
+            this.setSaldoAtualOrigem(this.getSaldoAnteriorOrigem());
+            this.setSaldoAtualDestino(this.getSaldoAnteriorDestino());
             this.mDataOperacao = new Date();
         }
     }
@@ -82,17 +82,17 @@ public class Transferencia {
     @Override
     public String toString() {
         return "## Transferência ##" +
-                "\nAgência de origem: " + this.GetContaOrigem().GetAgencia() +
-                "\nConta de origem: " + this.GetContaOrigem().GetConta() +
-                "\nNome do titular: " + this.GetContaOrigem().GetTitular().GetNome() +
-                "\nSaldo anterior: " + this.GetSaldoAnteriorOrigem() +
-                "\nSaldo atual: " + this.GetSaldoAtualOrigem() +
-                "\nAgência de destino: " + this.GetContaDestino().GetAgencia() +
-                "\nConta de destino: " + this.GetContaDestino().GetConta() +
-                "\nNome do titular: " + this.GetContaDestino().GetTitular().GetNome() +
-                "\nSaldo anterior: " + this.GetSaldoAnteriorDestino() +
-                "\nSaldo atual: " + this.GetSaldoAtualDestino() +
-                "\nValor transferido: " + this.GetValor() +
-                "\nData da transferência: " + this.GetDataOperacao();
+                "\nAgência de origem: " + this.getContaOrigem().getAgencia() +
+                "\nConta de origem: " + this.getContaOrigem().getConta() +
+                "\nNome do titular: " + this.getContaOrigem().getTitular().getNome() +
+                "\nSaldo anterior: " + this.getSaldoAnteriorOrigem() +
+                "\nSaldo atual: " + this.getSaldoAtualOrigem() +
+                "\nAgência de destino: " + this.getContaDestino().getAgencia() +
+                "\nConta de destino: " + this.getContaDestino().getConta() +
+                "\nNome do titular: " + this.getContaDestino().getTitular().getNome() +
+                "\nSaldo anterior: " + this.getSaldoAnteriorDestino() +
+                "\nSaldo atual: " + this.getSaldoAtualDestino() +
+                "\nValor transferido: " + this.getValor() +
+                "\nData da transferência: " + this.getDataOperacao();
     }
 }

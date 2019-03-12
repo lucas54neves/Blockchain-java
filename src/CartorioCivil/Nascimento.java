@@ -16,11 +16,11 @@ public class Nascimento {
         this.mDataRegistro = new Date();
     }
     
-    public Pessoa GetIndividuo() {
+    public Pessoa getIndividuo() {
         return this.mIndividuo;
     }
     
-    public Date GetDataRegistro() {
+    public Date getDataRegistro() {
         return this.mDataRegistro;
     }
     
@@ -28,26 +28,26 @@ public class Nascimento {
     public String toString() {
         String retorno = 
             "# Nascimento #" +
-            "\nNome da criança: " + this.GetIndividuo().GetNome() +
+            "\nNome da criança: " + this.getIndividuo().getNome() +
             "\nNome do pai: ";
         
-        if (this.GetIndividuo().GetPai() == null) {
+        if (this.getIndividuo().getPai() == null) {
             retorno += "***";
         } else {
-            retorno += this.GetIndividuo().GetPai().GetNome();
+            retorno += this.getIndividuo().getPai().getNome();
         }
         
         retorno += "\nNome da mãe: ";
-        if (this.GetIndividuo().GetMae() == null) {
+        if (this.getIndividuo().getMae() == null) {
             retorno += "***";
         } else {
-            retorno += this.GetIndividuo().GetMae().GetNome();
+            retorno += this.getIndividuo().getMae().getNome();
         }
         
-        retorno += "\nData do registro: " + this.GetDataRegistro() +
-            "\nData do nascimento: " + this.GetIndividuo().GetDataNascimento() +
-            "\nSexo da criança: " + this.GetIndividuo().GetSexo() +
-            "\nCPF: " + this.GetIndividuo().GetCpf();
+        retorno += "\nData do registro: " + this.getDataRegistro() +
+            "\nData do nascimento: " + this.getIndividuo().getDataNascimento() +
+            "\nSexo da criança: " + this.getIndividuo().getSexo() +
+            "\nCPF: " + this.getIndividuo().getCpf();
                  
         return retorno;
     }

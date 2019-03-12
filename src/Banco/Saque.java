@@ -11,47 +11,47 @@ public class Saque {
     public Saque(Conta contaOrigem, double valor) {
         this.mContaOrigem = contaOrigem;
         this.mValor = valor;
-        this.Operacao(valor);
+        this.operacao(valor);
     }
 
-    public Conta GetContaOrigem() {
+    public Conta getContaOrigem() {
         return this.mContaOrigem;
     }
 
-    public double GetValor() {
+    public double getValor() {
         return this.mValor;
     }
 
-    public double GetSaldoAnterior() {
+    public double getSaldoAnterior() {
         return this.mSaldoAnterior;
     }
 
-    public double GetSaldoAtual() {
+    public double getSaldoAtual() {
         return this.mSaldoAtual;
     }
 
-    public Date GetDataOperacao() {
+    public Date getDataOperacao() {
         return this.mDataOperacao;
     }
 
-    public void SetSaldoAnterior(double saldoAnterior) {
+    public void setSaldoAnterior(double saldoAnterior) {
         this.mSaldoAnterior = saldoAnterior;
     }
 
-    public void SetSaldoAtual(double saldoAtual) {
+    public void setSaldoAtual(double saldoAtual) {
         this.mSaldoAtual = saldoAtual;
     }
     
-    private void Operacao(double valor) {
+    private void operacao(double valor) {
         try {
-            this.SetSaldoAnterior(this.GetContaOrigem().GetSaldo());
-            this.GetContaOrigem().Sacar(valor);
+            this.setSaldoAnterior(this.getContaOrigem().getSaldo());
+            this.getContaOrigem().sacar(valor);
             System.out.println("Saque realizado.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Saque não realizada.");
         } finally {
-            this.SetSaldoAtual(this.GetContaOrigem().GetSaldo());
+            this.setSaldoAtual(this.getContaOrigem().getSaldo());
             this.mDataOperacao = new Date();
         }
     }
@@ -59,11 +59,11 @@ public class Saque {
     @Override
     public String toString() {
         return  "# Saque #" +
-                "\nNome do titular: " + this.GetContaOrigem().GetTitular().GetNome() +
-                "\nAgência: " + this.GetContaOrigem().GetAgencia() +
-                "\nConta: " + this.GetContaOrigem().GetConta() +
-                "\nSaldo anterior: " + this.GetSaldoAnterior() +
-                "\nValor depositado: " + this.GetValor() +
-                "\nSaldo atual: " + this.GetSaldoAtual();
+                "\nNome do titular: " + this.getContaOrigem().getTitular().getNome() +
+                "\nAgência: " + this.getContaOrigem().getAgencia() +
+                "\nConta: " + this.getContaOrigem().getConta() +
+                "\nSaldo anterior: " + this.getSaldoAnterior() +
+                "\nValor depositado: " + this.getValor() +
+                "\nSaldo atual: " + this.getSaldoAtual();
     }
 }

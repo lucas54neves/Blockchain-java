@@ -12,8 +12,8 @@ public class Teste {
         //System.out.println(p1);
         //System.out.println(p2);
         
-        Casamento uniao1 = new Casamento(p1.GetIndividuo(), p2.GetIndividuo(), new Date());
-        Casamento uniao2 = new Casamento(p2.GetIndividuo(), p3.GetIndividuo(), new Date());
+        Casamento uniao1 = new Casamento(p1.getIndividuo(), p2.getIndividuo(), new Date());
+        Casamento uniao2 = new Casamento(p2.getIndividuo(), p3.getIndividuo(), new Date());
         
         //System.out.println(uniao1);
         //System.out.println(uniao2);

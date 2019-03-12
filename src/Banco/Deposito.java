@@ -11,47 +11,47 @@ public class Deposito {
     public Deposito(Conta contaDestino, double valor) {
         this.mContaDestino = contaDestino;
         this.mValor = valor;
-        this.Operacao(valor);
+        this.operacao(valor);
     }
 
-    public Conta GetContaDestino() {
+    public Conta getContaDestino() {
         return mContaDestino;
     }
 
-    public double GetValor() {
+    public double getValor() {
         return mValor;
     }
 
-    public double GetSaldoAnterior() {
+    public double getSaldoAnterior() {
         return mSaldoAnterior;
     }
 
-    public double GetSaldoAtual() {
+    public double getSaldoAtual() {
         return mSaldoAtual;
     }
 
-    public Date GetDataOperacao() {
+    public Date getDataOperacao() {
         return mDataOperacao;
     }
 
-    public void SetSaldoAnterior(double saldoAnterior) {
+    public void setSaldoAnterior(double saldoAnterior) {
         this.mSaldoAnterior = saldoAnterior;
     }
 
-    public void SetSaldoAtual(double saldoAtual) {
+    public void setSaldoAtual(double saldoAtual) {
         this.mSaldoAtual = saldoAtual;
     }
     
-    private void Operacao(double valor) {
+    private void operacao(double valor) {
         try {
-            this.SetSaldoAnterior(this.GetContaDestino().GetSaldo());
-            this.GetContaDestino().Depositar(valor);
+            this.setSaldoAnterior(this.getContaDestino().getSaldo());
+            this.getContaDestino().depositar(valor);
             System.out.println("Depósito realizado.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Depósito não realizada.");
         } finally {
-            this.SetSaldoAtual(this.GetContaDestino().GetSaldo());
+            this.setSaldoAtual(this.getContaDestino().getSaldo());
             this.mDataOperacao = new Date();
         }
     }
@@ -59,11 +59,11 @@ public class Deposito {
     @Override
     public String toString() {
         return  "# Depósito #" +
-                "\nNome do titular: " + this.GetContaDestino().GetTitular().GetNome() +
-                "\nAgência: " + this.GetContaDestino().GetAgencia() +
-                "\nConta: " + this.GetContaDestino().GetConta() +
-                "\nSaldo anterior: " + this.GetSaldoAnterior() +
-                "\nValor depositado: " + this.GetValor() +
-                "\nSaldo atual: " + this.GetSaldoAtual();
+                "\nNome do titular: " + this.getContaDestino().getTitular().getNome() +
+                "\nAgência: " + this.getContaDestino().getAgencia() +
+                "\nConta: " + this.getContaDestino().getConta() +
+                "\nSaldo anterior: " + this.getSaldoAnterior() +
+                "\nValor depositado: " + this.getValor() +
+                "\nSaldo atual: " + this.getSaldoAtual();
     }
 }

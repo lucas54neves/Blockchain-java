@@ -15,43 +15,42 @@ public class Imovel {
         this.mValor = valor;
     }
 
-    public Pessoa GetDono() {
+    public Pessoa getDono() {
         return this.mDono;
     }
 
-    public int GetCodigo() {
+    public int getCodigo() {
         return this.mCodigo;
     }
 
-    public String GetEndereco() {
+    public String getEndereco() {
         return this.mEndereco;
     }
 
-    public double GetValor() {
+    public double getValor() {
         return this.mValor;
     }
+
+    public void setDono(Pessoa mDono) {
+        this.mDono = mDono;
+    }
+
+    public void setValor(double mValor) {
+        this.mValor = mValor;
+    }
     
-    public void Vender(Pessoa comprador, double oferta) {
-        try {
-            if (oferta < this.GetValor()) {
-                throw new IllegalArgumentException("Oferta é menor do que o valor do imóvel.");
-            } else {
-                this.mDono = comprador;
-                this.mValor = oferta;
-                System.out.println("Venda realizada.");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Venda não realizada.");
-        }
+    public CompraVenda vender(Pessoa comprador, double oferta) {
+        this.setDono(comprador);
+        this.setValor(oferta);
+        return new CompraVenda(this, comprador, this.getDono(), oferta);
     }
     
     @Override
     public String toString() {
         return "## Imóvel ##" +
-                "\nCódigo: " + this.GetCodigo() +
-                "\nDono: " + this.GetDono().GetNome() +
-                "\nEndereço: " + this.GetEndereco() +
-                "\nValor: " + this.GetValor();
+                "\nCódigo: " + this.getCodigo() +
+                "\nDono: " + this.getDono().getNome() +
+                "\nEndereço: " + this.getEndereco() +
+                "\nValor: " + this.getValor();
     }
 }

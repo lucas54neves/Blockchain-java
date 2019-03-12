@@ -14,28 +14,28 @@ public class Conta {
         this.mSaldo = 0;
     }
     
-    public double GetSaldo() {
+    public double getSaldo() {
         return this.mSaldo;
     }
     
-    public Pessoa GetTitular() {
+    public Pessoa getTitular() {
         return mTitular;
     }
 
-    public int GetAgencia() {
+    public int getAgencia() {
         return mAgencia;
     }
 
-    public int GetConta() {
+    public int getConta() {
         return mConta;
     }
     
-    public void Depositar(double valor) {
+    public void depositar(double valor) {
         this.mSaldo+=valor;
     }
     
-    public void Sacar(double valor) {
-        if (this.GetSaldo() < valor) {
+    public void sacar(double valor) {
+        if (this.getSaldo() < valor) {
             throw new IllegalArgumentException("Saldo insuficiente.");
         } else {
             this.mSaldo-=valor;
@@ -45,9 +45,9 @@ public class Conta {
     @Override
     public String toString() {
         return "## Conta ##" +
-                "\nTitular: " + this.GetTitular().GetNome() +
-                "\nAgência: " + this.GetAgencia() +
-                "\nConta: " + this.GetConta() +
-                "\nSaldo: " + this.GetSaldo();
+                "\nTitular: " + this.getTitular().getNome() +
+                "\nAgência: " + this.getAgencia() +
+                "\nConta: " + this.getConta() +
+                "\nSaldo: " + this.getSaldo();
     }
 }

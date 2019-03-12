@@ -29,32 +29,32 @@ public class Sistema {
         chain.adicionaBloco(bloco);
         
         Nascimento crianca1 = new Nascimento("Joana", "F", p1, p2, 5, new Date());
-        Pessoa f1 = crianca1.GetIndividuo();
+        Pessoa f1 = crianca1.getIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
         Nascimento crianca2 = new Nascimento("Joaquina", "F", p1, p2, 6, new Date());
-        Pessoa f2 = crianca2.GetIndividuo();
+        Pessoa f2 = crianca2.getIndividuo();
         bloco = new Block (crianca2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
         Nascimento crianca3 = new Nascimento("Joaquim", "M", p3, p4, 7, new Date());
-        Pessoa f3 = crianca3.GetIndividuo();
+        Pessoa f3 = crianca3.getIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
         Nascimento crianca4 = new Nascimento("Joana", "F", p3, p4, 8, new Date());
-        Pessoa f4 = crianca4.GetIndividuo();
+        Pessoa f4 = crianca4.getIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
         Nascimento crianca5 = new Nascimento("Joaquina", "F", p1, p2, 9, new Date());
-        Pessoa f5 = crianca5.GetIndividuo();
+        Pessoa f5 = crianca5.getIndividuo();
         bloco = new Block (crianca2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
         Nascimento crianca6 = new Nascimento("Joaquim", "M", p3, p4, 10, new Date());
-        Pessoa f6 = crianca6.GetIndividuo();
+        Pessoa f6 = crianca6.getIndividuo();
         bloco = new Block (crianca1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
         chain.adicionaBloco(bloco);
         
