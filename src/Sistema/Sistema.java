@@ -184,6 +184,65 @@ public class Sistema {
         chain.adicionaBloco(bloco);
     }
     
+    public void criaBancoDadosImovel(Chain chain, Pessoa p1, Pessoa p2, Pessoa p3, Pessoa p4, Pessoa p5, Pessoa p6, Pessoa p7, Pessoa p8, Pessoa p9, Pessoa p10) {
+        Block bloco;
+        
+        Imovel casa1 = new Imovel(p1, 1, "Rua Um", 95.8);
+        Imovel casa2 = new Imovel(p2, 2, "Rua Um", 50.8);
+        Imovel casa3 = new Imovel(p3, 3, "Rua Dois", 89.8);
+        Imovel casa4 = new Imovel(p4, 4, "Rua Sete", 80.8);
+        Imovel casa5 = new Imovel(p5, 5, "Rua Um", 90.8);
+        
+        bloco = new Block (casa1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (casa2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (casa3, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (casa4, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (casa5, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        
+        CompraVenda registro1 = new CompraVenda(casa1, p6, 123.1);
+        CompraVenda registro2 = new CompraVenda(casa2, p7, 345.6);
+        CompraVenda registro3 = new CompraVenda(casa3, p8, 565.7);
+        CompraVenda registro4 = new CompraVenda(casa4, p9, 123.6);
+        CompraVenda registro5 = new CompraVenda(casa5, p10, 10.7);
+        CompraVenda registro6 = new CompraVenda(casa1, p7, 345.6);
+        CompraVenda registro7 = new CompraVenda(casa2, p7, 34.5);
+        CompraVenda registro8 = new CompraVenda(casa3, p8, 435.6);
+        CompraVenda registro9 = new CompraVenda(casa4, p6, 234.5);
+        CompraVenda registro10 = new CompraVenda(casa5, p9, 456.5);
+        CompraVenda registro11 = new CompraVenda(casa1, p10, 345.);
+        CompraVenda registro12 = new CompraVenda(casa2, p8, 24.6);
+        
+        bloco = new Block (registro1, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro2, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro3, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro4, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro5, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro6, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro7, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro8, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro9, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro10, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro11, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+        bloco = new Block (registro12, chain.ultimoBloco().getHash(), chain.tamanho()+1);
+        chain.adicionaBloco(bloco);
+    }
+    
     public void MenuPrincipal(Chain chain,Scanner ler) {
         int opcao = -1;
         
@@ -565,14 +624,6 @@ public class Sistema {
                         CompraVenda registro;
                         double oferta;
                         
-                        System.out.println("Entre com o CPF do vendedor.");
-                        cpfVendedor = ler.nextInt();
-                        vendedor = chain.buscaRegistroPessoa(cpfVendedor);
-                        
-                        if (vendedor == null) {
-                            throw new IllegalArgumentException("Não foi possível registrar a venda do imóvel.");
-                        }
-                        
                         System.out.println("Entre com o CPF do comprador.");
                         cpfComprador = ler.nextInt();
                         comprador = chain.buscaRegistroPessoa(cpfComprador);
@@ -588,7 +639,7 @@ public class Sistema {
                         System.out.println("Entre com a oferta da compra.");
                         oferta = ler.nextDouble();
                         
-                        registro = new CompraVenda(imovel, comprador, vendedor, oferta);
+                        registro = new CompraVenda(imovel, comprador, oferta);
                         bloco = new Block(registro, chain.ultimoBloco().getHash(), chain.tamanho()+1);
                         chain.adicionaBloco(bloco);
                     } catch (IllegalArgumentException e) {

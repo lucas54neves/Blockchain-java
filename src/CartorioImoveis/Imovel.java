@@ -42,7 +42,7 @@ public class Imovel {
     public CompraVenda vender(Pessoa comprador, double oferta) {
         this.setDono(comprador);
         this.setValor(oferta);
-        return new CompraVenda(this, comprador, this.getDono(), oferta);
+        return new CompraVenda(this, comprador, oferta);
     }
     
     @Override

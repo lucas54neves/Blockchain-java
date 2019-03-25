@@ -9,10 +9,10 @@ public class CompraVenda {
     private final double mValor;
     private final Date mDataRegistro;
 
-    public CompraVenda(Imovel imovel, Pessoa comprador, Pessoa vendedor, double oferta) {
+    public CompraVenda(Imovel imovel, Pessoa comprador, double oferta) {
         this.mImovel = imovel;
         this.mComprador = comprador;
-        this.mVendedor = vendedor;
+        this.mVendedor = this.mImovel.getDono();
         this.mValor = oferta;
         this.mImovel.vender(comprador, oferta);
         this.mDataRegistro = new Date();
