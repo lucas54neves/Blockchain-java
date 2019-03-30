@@ -345,8 +345,8 @@ public class Sistema {
                         mes = ler.nextInt();
                         System.out.println("Entre com o ano que deseja consultar.");
                         ano = ler.nextInt();
-                        dataInicial = new Date(ano+1900, mes-1, 1);
-                        dataFinal = new Date(ano+1900, mes, 1);
+                        dataInicial = new Date(ano-1900, mes-1, 1);
+                        dataFinal = new Date(ano-1900, mes, 1);
 
                         System.out.println(chain.extratoBancario(conta1, dataInicial, dataFinal));
                     } catch (IllegalArgumentException e) {
